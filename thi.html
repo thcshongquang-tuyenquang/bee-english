@@ -60,6 +60,37 @@
             flex-direction: column;
         }
 
+        /* Home Button */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4);
+        }
+
+        .home-button i {
+            font-size: 16px;
+        }
+
         /* Main Content Area - Full Width */
         .main-content {
             width: 100%;
@@ -259,6 +290,7 @@
             align-items: center;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             flex-shrink: 0;
+            padding-left: 80px; /* Space for home button */
         }
 
         .room-info {
@@ -1194,6 +1226,7 @@
                 flex-direction: column;
                 gap: 12px;
                 align-items: flex-start;
+                padding-left: 70px;
             }
             
             .room-title {
@@ -1246,6 +1279,13 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .home-button {
+                top: 15px;
+                left: 15px;
+                padding: 8px 15px;
+                font-size: 13px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1255,6 +1295,7 @@
             
             .room-header {
                 padding: 10px 12px;
+                padding-left: 65px;
             }
             
             .room-title {
@@ -1277,6 +1318,13 @@
             .modal-content {
                 padding: 20px;
                 margin: 10px;
+            }
+            
+            .home-button {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
             }
         }
         
@@ -1301,6 +1349,12 @@
 </head>
 <body>
     <div id="app">
+        <!-- Home Button - Only show on room page -->
+        <a href="https://thcshongquang-tuyenquang.github.io/desktop-tutorial/main.html" class="home-button hidden" id="homeButton">
+            <i class="fas fa-home"></i>
+            
+        </a>
+
         <!-- Main Content -->
         <div class="main-content">
             <!-- Home Page -->
@@ -1685,7 +1739,7 @@
         const db = firebase.firestore();
         
         // Khởi tạo Gemini AI
-        const GEMINI_API_KEY = "AIzaSyCjYZ3i0-BZMcPSkftNE8Pz76vRcl8scRs";
+        const GEMINI_API_KEY = "AIzaSyCMcIshStrZdPEzZ22axJTJs9gZEnUFRFg";
         const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
         let aiModel;
         
@@ -2024,12 +2078,14 @@
         function showRoomPage() {
             document.getElementById('homePage').classList.add('hidden');
             document.getElementById('roomPage').classList.remove('hidden');
+            document.getElementById('homeButton').classList.remove('hidden');
         }
         
         // Hiển thị trang chủ
         function showHomePage() {
             document.getElementById('homePage').classList.remove('hidden');
             document.getElementById('roomPage').classList.add('hidden');
+            document.getElementById('homeButton').classList.add('hidden');
             
             // Dừng timer và listeners
             cleanupRoom();
@@ -2578,7 +2634,10 @@
             }
         }
         
-        // Kiểm tra phát âm flashcard - ĐÃ SỬA: Sửa lỗi phát âm
+        // ============= CODE PHÁT ÂM TIẾNG ANH MỚI =============
+        // (Thay thế toàn bộ phần code phát âm cũ)
+        
+        // Kiểm tra phát âm flashcard
         function testFlashcardPronunciation() {
             const word = document.getElementById('flashcardEnglish').value.trim();
             if (word) {
@@ -2588,7 +2647,7 @@
             }
         }
         
-        // Phát âm từ hiện tại - ĐÃ SỬA: Sửa lỗi phát âm
+        // Phát âm từ hiện tại
         function playCurrentPronunciation() {
             if (roomContents.length > 0 && currentContentIndex < roomContents.length) {
                 const currentContent = roomContents[currentContentIndex];
@@ -2597,6 +2656,89 @@
                 }
             }
         }
+        
+        // Hàm phát âm sử dụng API
+        async function speakText(text) {
+            try {
+                // Sử dụng Web Speech API
+                if ('speechSynthesis' in window) {
+                    // Hủy phát âm trước đó nếu có
+                    speechSynthesis.cancel();
+                    
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.8;
+                    utterance.pitch = 1;
+                    utterance.volume = 1;
+                    
+                    // Tìm giọng nói tiếng Anh
+                    const voices = speechSynthesis.getVoices();
+                    let englishVoice = null;
+                    
+                    // Ưu tiên giọng nói tiếng Anh
+                    for (let voice of voices) {
+                        if (voice.lang.startsWith('en-')) {
+                            englishVoice = voice;
+                            break;
+                        }
+                    }
+                    
+                    if (englishVoice) {
+                        utterance.voice = englishVoice;
+                    }
+                    
+                    // Thử phát âm
+                    speechSynthesis.speak(utterance);
+                    
+                    // Hiển thị thông báo
+                    showNotification('Đang phát âm từ: ' + text, 'info');
+                    
+                } else {
+                    // Fallback: Sử dụng Google TTS API
+                    const googleTTSUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=${encodeURIComponent(text)}`;
+                    
+                    // Tạo audio element
+                    const audio = new Audio();
+                    audio.src = googleTTSUrl;
+                    
+                    // Thêm event listeners
+                    audio.onerror = function() {
+                        showNotification('Không thể phát âm từ này', 'warning');
+                    };
+                    
+                    audio.onended = function() {
+                        console.log('Phát âm hoàn thành');
+                    };
+                    
+                    // Phát âm
+                    await audio.play();
+                    
+                }
+            } catch (error) {
+                console.error('Lỗi phát âm:', error);
+                showNotification('Không thể phát âm từ này', 'warning');
+                
+                // Fallback cuối cùng: Sử dụng responsivevoice nếu có
+                if (typeof responsiveVoice !== 'undefined') {
+                    responsiveVoice.speak(text, "US English Female", {
+                        rate: 0.8,
+                        pitch: 1,
+                        volume: 1
+                    });
+                }
+            }
+        }
+        
+        // Khởi tạo voices cho speech synthesis
+        if ('speechSynthesis' in window) {
+            // Tải voices khi sẵn sàng
+            speechSynthesis.onvoiceschanged = function() {
+                console.log('Voices đã tải:', speechSynthesis.getVoices().length);
+            };
+            speechSynthesis.getVoices(); // Khởi tạo voices
+        }
+        
+        // ============= END OF NEW PRONUNCIATION CODE =============
         
         // Lật flashcard
         function flipFlashcard() {
@@ -3044,46 +3186,6 @@
             });
         }
         
-        // Hàm phát âm - ĐÃ SỬA: Sửa lỗi không phát âm
-        function speakText(text) {
-            if ('speechSynthesis' in window) {
-                // Hủy phát âm trước đó nếu có
-                speechSynthesis.cancel();
-                
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.8;
-                utterance.pitch = 1;
-                utterance.volume = 1;
-                
-                // Tìm giọng nói tiếng Anh
-                const voices = speechSynthesis.getVoices();
-                let englishVoice = null;
-                
-                // Ưu tiên giọng nói tiếng Anh
-                for (let voice of voices) {
-                    if (voice.lang.startsWith('en-')) {
-                        englishVoice = voice;
-                        break;
-                    }
-                }
-                
-                if (englishVoice) {
-                    utterance.voice = englishVoice;
-                }
-                
-                // Thử phát âm
-                try {
-                    speechSynthesis.speak(utterance);
-                } catch (error) {
-                    console.error('Lỗi phát âm:', error);
-                    showNotification('Không thể phát âm từ này', 'warning');
-                }
-            } else {
-                showNotification('Trình duyệt không hỗ trợ phát âm!', 'warning');
-            }
-        }
-        
         // Hiển thị thông báo
         function showNotification(message, type) {
             const notification = document.getElementById('notification');
@@ -3099,15 +3201,6 @@
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 4000);
-        }
-        
-        // Khởi tạo voices cho speech synthesis
-        if ('speechSynthesis' in window) {
-            // Tải voices khi sẵn sàng
-            speechSynthesis.onvoiceschanged = function() {
-                console.log('Voices đã tải:', speechSynthesis.getVoices().length);
-            };
-            speechSynthesis.getVoices(); // Khởi tạo voices
         }
         
         // ============= AI FUNCTIONS =============
