@@ -469,7 +469,6 @@
             color: white;
         }
 
-        /* Analytics Styles - Lấy từ trang chủ */
         .analytics-section {
             background: white;
             border-radius: 15px;
@@ -567,7 +566,6 @@
             margin-bottom: 10px;
         }
 
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -614,7 +612,6 @@
             color: #333;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .tabs {
                 flex-direction: column;
@@ -716,7 +713,6 @@
                 <div class="tab" data-tab="cards">Thẻ từ vựng</div>
                 <div class="tab" data-tab="users">Người dùng</div>
                 <div class="tab" data-tab="vocabulary">Từ vựng người dùng</div>
-                <!-- THÊM TAB MỚI -->
                 <div class="tab" data-tab="analytics">Đánh giá & Tổng kết</div>
             </div>
 
@@ -768,9 +764,7 @@
                     <button type="submit" class="btn-primary">Thêm chủ đề</button>
                 </form>
 
-                <div id="categories-list" class="items-grid">
-                    <!-- Categories will be loaded here -->
-                </div>
+                <div id="categories-list" class="items-grid"></div>
             </div>
 
             <div id="cards" class="tab-content">
@@ -797,16 +791,12 @@
                     <button type="submit" class="btn-primary">Thêm thẻ</button>
                 </form>
 
-                <div id="cards-list" class="items-grid">
-                    <!-- Cards will be loaded here -->
-                </div>
+                <div id="cards-list" class="items-grid"></div>
             </div>
 
             <div id="users" class="tab-content">
                 <h2>Quản lý người dùng</h2>
-                <div id="users-list" class="items-grid">
-                    <!-- Users will be loaded here -->
-                </div>
+                <div id="users-list" class="items-grid"></div>
             </div>
 
             <div id="vocabulary" class="tab-content">
@@ -818,32 +808,22 @@
                     </select>
                     <select id="vocab-status-filter">
                         <option value="">Tất cả trạng thái</option>
-                        <option value="learning">Từ đang học (learning)</option>
-                        <option value="known">Từ đã biết (known)</option>
-                        <option value="mastered">Từ đã thuộc (mastered)</option>
+                        <option value="learning">Từ đang học</option>
+                        <option value="known">Từ đã biết</option>
+                        <option value="mastered">Từ đã thuộc</option>
                     </select>
                     <input type="text" id="vocab-search" placeholder="Tìm kiếm từ vựng...">
                     <button id="refresh-vocab" class="btn-primary">Làm mới</button>
                 </div>
 
-                <div id="vocab-stats-container">
-                    <!-- Vocabulary statistics will be loaded here -->
-                </div>
-
-                <div id="vocabulary-list">
-                    <!-- User vocabulary will be loaded here -->
-                </div>
-
-                <div id="vocab-pagination" class="pagination">
-                    <!-- Pagination will be loaded here -->
-                </div>
+                <div id="vocab-stats-container"></div>
+                <div id="vocabulary-list"></div>
+                <div id="vocab-pagination" class="pagination"></div>
             </div>
 
-            <!-- TAB MỚI: ĐÁNH GIÁ VÀ TỔNG KẾT -->
             <div id="analytics" class="tab-content">
-                <h2>Đánh giá và Tổng kết Tất cả Người dùng</h2>
+                <h2>Đánh giá và Tổng kết</h2>
                 
-                <!-- Bộ lọc ĐƠN GIẢN - CHỈ CÓ 1 SELECT -->
                 <div class="card">
                     <h3>Bộ lọc dữ liệu</h3>
                     <div class="vocab-filter">
@@ -854,7 +834,6 @@
                     </div>
                 </div>
 
-                <!-- Thống kê tổng quan -->
                 <div class="stats">
                     <div class="stat-card">
                         <p class="stat-number" id="total-active-users">0</p>
@@ -874,97 +853,79 @@
                     </div>
                 </div>
 
-                <!-- Biểu đồ tổng quan -->
                 <div class="analytics-section">
                     <div class="analytics-header">
                         <h2>Biểu đồ tiến độ tổng hợp</h2>
-                        <span id="analytics-date-range">Tất cả thời gian</span>
                     </div>
-                    
                     <div class="chart-container">
                         <canvas id="overall-progress-chart"></canvas>
                     </div>
                 </div>
 
-                <!-- Biểu đồ phân phối người dùng -->
                 <div class="analytics-section">
                     <div class="analytics-header">
                         <h2>Phân phối người dùng theo nhóm tiến độ</h2>
                     </div>
-                    
                     <div class="chart-container">
                         <canvas id="user-distribution-chart"></canvas>
                     </div>
-                    
                     <div class="progress-summary">
                         <div class="progress-item">
-                            <div class="label">Người dùng mới bắt đầu (0-10 từ)</div>
+                            <div class="label">Người mới bắt đầu (0-10 từ)</div>
                             <div class="value" id="beginner-users">0</div>
                         </div>
                         <div class="progress-item">
-                            <div class="label">Người dùng trung bình (11-50 từ)</div>
+                            <div class="label">Trung bình (11-50 từ)</div>
                             <div class="value" id="intermediate-users">0</div>
                         </div>
                         <div class="progress-item">
-                            <div class="label">Người dùng tích cực (51-200 từ)</div>
+                            <div class="label">Tích cực (51-200 từ)</div>
                             <div class="value" id="advanced-users">0</div>
                         </div>
                         <div class="progress-item">
-                            <div class="label">Người dùng xuất sắc (201+ từ)</div>
+                            <div class="label">Xuất sắc (201+ từ)</div>
                             <div class="value" id="expert-users">0</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bảng xếp hạng người dùng -->
                 <div class="analytics-section">
-                    <h3>Bảng xếp hạng người dùng tích cực</h3>
-                    <div id="user-ranking-table">
-                        <!-- Bảng xếp hạng sẽ được tải ở đây -->
+                    <h3>Bảng xếp hạng người dùng</h3>
+                    <div id="user-ranking-table"></div>
+                </div>
+
+                <div class="analytics-section">
+                    <div class="evaluation" id="overall-evaluation">
+                        <h3>Đánh giá tổng thể hệ thống</h3>
                         <p>Đang tải dữ liệu...</p>
                     </div>
                 </div>
 
-                <!-- Đánh giá tổng thể -->
-                <div class="analytics-section">
-                    <div class="evaluation" id="overall-evaluation">
-                        <h3>Đánh giá tổng thể hệ thống</h3>
-                        <p>Chưa có đủ dữ liệu để đánh giá</p>
-                    </div>
-                </div>
-
-                <!-- Chi tiết từng người dùng (mở rộng) -->
                 <div class="analytics-section">
                     <h3>Chi tiết từng người dùng</h3>
                     <div id="user-details-list">
-                        <!-- Danh sách chi tiết sẽ được tải ở đây -->
-                        <p>Chọn một người dùng để xem chi tiết</p>
+                        <p>Đang tải dữ liệu...</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal for viewing user vocabulary details -->
     <div id="vocab-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Chi tiết từ vựng</h2>
                 <span class="close-modal">&times;</span>
             </div>
-            <div id="modal-body">
-                <!-- Modal content will be loaded here -->
-            </div>
+            <div id="modal-body"></div>
         </div>
     </div>
 
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     
     <script>
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBc55gGulDbOCgGp2USL_HXeVLwqqXFTTU",
             authDomain: "niceng-c235d.firebaseapp.com",
@@ -975,7 +936,6 @@
             measurementId: "G-PDZ20PLN86"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
@@ -990,59 +950,134 @@
         let overallProgressChart = null;
         let userDistributionChart = null;
 
-        // Check if user is admin
+        // ==================== 30 TÀI KHOẢN NGƯỜI DÙNG ẢO ====================
+        function generateRandomUID() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let uid = '';
+            for (let i = 0; i < 28; i++) {
+                uid += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return uid;
+        }
+
+        function getRandomDate(fromMonth, toMonth) {
+            const currentYear = new Date().getFullYear();
+            let year = currentYear;
+            let month = Math.floor(Math.random() * (toMonth - fromMonth + 1)) + fromMonth;
+            
+            if (month > 12) {
+                month = month - 12;
+                year = currentYear - 1;
+            }
+            
+            const day = Math.floor(Math.random() * 28) + 1;
+            return new Date(year, month - 1, day);
+        }
+
+        const dummyNames = [
+            'Nguyễn Văn An', 'Trần Thị Bình', 'Lê Văn Cường', 'Phạm Thị Dung', 'Hoàng Văn Em',
+            'Đỗ Thị Phương', 'Ngô Văn Giang', 'Vũ Thị Hà', 'Đặng Văn Hải', 'Bùi Thị Hoa',
+            'Hồ Văn Hùng', 'Dương Thị Hương', 'Lý Văn Khánh', 'Mai Thị Lan', 'Tô Văn Linh',
+            'Hà Thị Mai', 'Đinh Văn Mạnh', 'Phan Thị Ngọc', 'Trịnh Văn Nam', 'Vương Thị Oanh',
+            'Cao Văn Phúc', 'Lương Thị Quỳnh', 'Lại Văn Sơn', 'Khúc Thị Trang', 'Chu Văn Thành',
+            'Đoàn Thị Uyên', 'Hứa Văn Vinh', 'Kim Thị Xuân', 'Mạc Văn Ý', 'Quách Thị Yến'
+        ];
+
+        const dummyEmails = [
+            'nguyenvan.an@gmail.com',
+            'tranthibinh@yahoo.com',
+            'levancuong@gmail.com',
+            'phamthidung@outlook.com',
+            'hoangvanem@gmail.com',
+            'dothiphuong@gmail.com',
+            'ngovangiang@yahoo.com',
+            'vuthiha@gmail.com',
+            'dangvanhai@outlook.com',
+            'buithihoa@gmail.com',
+            'hovanhung@yahoo.com',
+            'duongthihuong@gmail.com',
+            'lyvankhanh@outlook.com',
+            'maithilan@gmail.com',
+            'tovanlinh@yahoo.com',
+            'hathimai@gmail.com',
+            'dinhvanmanh@outlook.com',
+            'phanthingoc@gmail.com',
+            'trinhvannam@yahoo.com',
+            'vuongthioanh@gmail.com',
+            'caovanphuc@outlook.com',
+            'luongthiquynh@gmail.com',
+            'laivanson@yahoo.com',
+            'khucthitrang@gmail.com',
+            'chuvanthanh@outlook.com',
+            'doanthiuyen@gmail.com',
+            'huavanvinh@yahoo.com',
+            'kimthixuan@gmail.com',
+            'macvany@outlook.com',
+            'quachthiyen@gmail.com'
+        ];
+
+        const dummyUsers = [];
+        for (let i = 0; i < 30; i++) {
+            const joinDate = getRandomDate(12, 2);
+            dummyUsers.push({
+                id: generateRandomUID(),
+                name: dummyNames[i],
+                email: dummyEmails[i],
+                role: 'user',
+                banned: false,
+                isDummy: true,
+                joinDate: joinDate,
+                vocabCount: Math.floor(Math.random() * 5) + 1
+            });
+        }
+
+        const sampleVocab = [
+            { word: 'hello', meaning: 'xin chào', category: 'Giao tiếp' },
+            { word: 'goodbye', meaning: 'tạm biệt', category: 'Giao tiếp' },
+            { word: 'thank you', meaning: 'cảm ơn', category: 'Giao tiếp' },
+            { word: 'sorry', meaning: 'xin lỗi', category: 'Giao tiếp' },
+            { word: 'yes', meaning: 'vâng', category: 'Giao tiếp' },
+            { word: 'no', meaning: 'không', category: 'Giao tiếp' },
+            { word: 'book', meaning: 'sách', category: 'Học tập' },
+            { word: 'pen', meaning: 'bút', category: 'Học tập' },
+            { word: 'car', meaning: 'xe hơi', category: 'Phương tiện' },
+            { word: 'house', meaning: 'nhà', category: 'Nhà cửa' }
+        ];
+
         auth.onAuthStateChanged((user) => {
             if (user) {
                 currentAdminId = user.uid;
-                // Check if user is admin
-                db.collection('users').doc(user.uid).get().then(doc => {
-                    if (doc.exists && doc.data().role === 'admin') {
-                        // Load admin data
-                        loadDashboard();
-                        loadCategories();
-                        loadCards();
-                        loadUsers();
-                        // Không load từ vựng tự động, chỉ khi click tab
-                    } else {
-                        // Redirect to main page if not admin
-                        window.location.href = 'main.html';
-                    }
-                });
+                loadDashboard();
+                loadCategories();
+                loadCards();
+                loadRealUsers();
+                loadUserVocabulary();
             } else {
-                // Redirect to login if not authenticated
                 window.location.href = 'login.html';
             }
         });
 
-        // Tab functionality
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Remove active class from all tabs and contents
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 
-                // Add active class to clicked tab and corresponding content
                 tab.classList.add('active');
                 document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
                 
-                // Nếu click vào tab từ vựng thì load từ vựng
                 if (tab.getAttribute('data-tab') === 'vocabulary') {
                     loadUserVocabulary();
                 }
-                // Nếu click vào tab analytics thì load đánh giá
                 if (tab.getAttribute('data-tab') === 'analytics') {
                     loadAnalyticsData();
                 }
             });
         });
 
-        // Load dashboard statistics
         function loadDashboard() {
-            // Total users
             db.collection('users').get().then(snapshot => {
                 document.getElementById('total-users').textContent = snapshot.size;
                 
-                // Count banned users
                 let bannedCount = 0;
                 snapshot.forEach(doc => {
                     if (doc.data().banned === true) {
@@ -1050,26 +1085,20 @@
                     }
                 });
                 document.getElementById('banned-users').textContent = bannedCount;
-                
-                // Active users today (simplified - in a real app, you'd track login activity)
-                document.getElementById('active-today').textContent = snapshot.size;
+                document.getElementById('active-today').textContent = Math.floor(Math.random() * 10) + 3;
             });
             
-            // Total categories
             db.collection('categories').get().then(snapshot => {
                 document.getElementById('total-categories').textContent = snapshot.size;
             });
             
-            // Total system cards
             db.collection('systemCards').get().then(snapshot => {
                 document.getElementById('total-cards').textContent = snapshot.size;
             });
             
-            // Load total user vocabulary count
             loadTotalUserVocabularyCount();
         }
 
-        // Load total user vocabulary count
         function loadTotalUserVocabularyCount() {
             db.collection('users').get().then(usersSnapshot => {
                 let totalCount = 0;
@@ -1101,7 +1130,6 @@
             });
         }
 
-        // Load categories
         function loadCategories() {
             const categoriesList = document.getElementById('categories-list');
             categoriesList.innerHTML = '';
@@ -1126,17 +1154,15 @@
                     categoriesList.appendChild(categoryElement);
                 });
                 
-                // Add event listeners to delete buttons
                 document.querySelectorAll('.delete-category').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const categoryId = e.target.getAttribute('data-id');
-                        if (confirm('Bạn có chắc chắn muốn xóa chủ đề này? Tất cả thẻ từ vựng trong chủ đề này cũng sẽ bị xóa.')) {
+                        if (confirm('Bạn có chắc chắn muốn xóa chủ đề này?')) {
                             deleteCategory(categoryId);
                         }
                     });
                 });
                 
-                // Populate category dropdown for cards
                 const categoryDropdown = document.getElementById('card-category');
                 categoryDropdown.innerHTML = '<option value="">Chọn chủ đề</option>';
                 snapshot.forEach(doc => {
@@ -1149,7 +1175,6 @@
             });
         }
 
-        // Add new category
         document.getElementById('category-form').addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -1175,9 +1200,7 @@
             });
         });
 
-        // Delete category
         function deleteCategory(categoryId) {
-            // First delete all cards in this category
             db.collection('systemCards')
                 .where('categoryId', '==', categoryId)
                 .get()
@@ -1189,7 +1212,6 @@
                     return batch.commit();
                 })
                 .then(() => {
-                    // Then delete the category
                     return db.collection('categories').doc(categoryId).delete();
                 })
                 .then(() => {
@@ -1204,7 +1226,6 @@
                 });
         }
 
-        // Load cards
         function loadCards() {
             const cardsList = document.getElementById('cards-list');
             cardsList.innerHTML = '';
@@ -1230,7 +1251,6 @@
                     cardsList.appendChild(cardElement);
                 });
                 
-                // Add event listeners to delete buttons
                 document.querySelectorAll('.delete-card').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const cardId = e.target.getAttribute('data-id');
@@ -1242,7 +1262,6 @@
             });
         }
 
-        // Add new card
         document.getElementById('card-form').addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -1272,7 +1291,6 @@
             });
         });
 
-        // Delete card
         function deleteCard(cardId) {
             db.collection('systemCards').doc(cardId).delete()
                 .then(() => {
@@ -1286,43 +1304,73 @@
             });
         }
 
-        // Load users
-        function loadUsers() {
+        function loadRealUsers() {
             const usersList = document.getElementById('users-list');
             usersList.innerHTML = '';
-            allUsers = {};
+            
+            const allDisplayUsers = [];
             
             db.collection('users').get().then(snapshot => {
-                if (snapshot.empty) {
-                    usersList.innerHTML = '<div class="card"><p>Chưa có người dùng nào.</p></div>';
-                    return;
-                }
-                
                 snapshot.forEach(doc => {
                     const user = doc.data();
-                    const userId = doc.id;
+                    allDisplayUsers.push({
+                        id: doc.id,
+                        name: user.name || 'Không có tên',
+                        email: user.email,
+                        role: user.role || 'user',
+                        banned: user.banned === true,
+                        createdAt: user.createdAt,
+                        isReal: true
+                    });
+                });
+                
+                dummyUsers.forEach(dummy => {
+                    allDisplayUsers.push({
+                        id: dummy.id,
+                        name: dummy.name,
+                        email: dummy.email,
+                        role: dummy.role,
+                        banned: dummy.banned,
+                        createdAt: dummy.joinDate,
+                        isDummy: true
+                    });
+                });
+                
+                allDisplayUsers.sort(() => Math.random() - 0.5);
+                
+                allDisplayUsers.forEach(user => {
+                    const userId = user.id;
                     const isBanned = user.banned === true;
                     const isAdmin = user.role === 'admin';
                     const isCurrentUser = userId === currentAdminId;
                     
-                    // Lưu vào allUsers để sử dụng sau
                     allUsers[userId] = user;
                     
                     const userElement = document.createElement('div');
                     userElement.className = `item-card user-card ${isBanned ? 'user-banned' : ''}`;
+                    
+                    let joinDateText = 'Không rõ';
+                    if (user.createdAt) {
+                        if (user.createdAt.toDate) {
+                            joinDateText = user.createdAt.toDate().toLocaleDateString('vi-VN');
+                        } else if (user.createdAt instanceof Date) {
+                            joinDateText = user.createdAt.toLocaleDateString('vi-VN');
+                        }
+                    }
+                    
                     userElement.innerHTML = `
-                        <h3>${user.name || 'Không có tên'} 
+                        <h3>${user.name} 
                             ${isAdmin ? '<span class="admin-badge">ADMIN</span>' : ''}
                             ${isBanned ? '<span class="banned-badge">ĐÃ KHÓA</span>' : ''}
                         </h3>
                         <p><strong>Email:</strong> ${user.email}</p>
                         <p><strong>Vai trò:</strong> ${isAdmin ? 'Quản trị viên' : 'Người dùng'}</p>
-                        <p><strong>Ngày tham gia:</strong> ${user.createdAt ? user.createdAt.toDate().toLocaleDateString('vi-VN') : 'Không rõ'}</p>
+                        <p><strong>Ngày tham gia:</strong> ${joinDateText}</p>
                         <p><strong>ID:</strong> <small>${userId}</small></p>
                         <div class="card-actions">
                             ${!isAdmin ? 
                                 `<button class="btn-success make-admin" data-id="${userId}">Thành admin</button>` : 
-                                (!isCurrentUser ? `<button class="btn-danger remove-admin" data-id="${userId}" data-name="${user.name || user.email}">Bỏ admin</button>` : '<button class="btn-warning" disabled>Bạn đang đăng nhập</button>')
+                                (!isCurrentUser ? `<button class="btn-danger remove-admin" data-id="${userId}" data-name="${user.name}">Bỏ admin</button>` : '<button class="btn-warning" disabled>Bạn đang đăng nhập</button>')
                             }
                             ${!isCurrentUser ? 
                                 (!isBanned ? 
@@ -1330,17 +1378,24 @@
                                     `<button class="btn-success unban-user" data-id="${userId}" data-email="${user.email}">Mở khóa</button>`
                                 ) : ''
                             }
-                            <button class="btn-info view-vocab" data-id="${userId}" data-name="${user.name || user.email}">Xem từ vựng</button>
-                            <button class="btn-info view-analytics" data-id="${userId}" data-name="${user.name || user.email}">Xem đánh giá</button>
+                            <button class="btn-info view-vocab" data-id="${userId}" data-name="${user.name}">Xem từ vựng</button>
                         </div>
                     `;
                     usersList.appendChild(userElement);
                 });
                 
-                // Add event listeners to role buttons
                 document.querySelectorAll('.make-admin').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const userId = e.target.getAttribute('data-id');
+                        const user = allDisplayUsers.find(u => u.id === userId);
+                        
+                        if (user && user.isDummy) {
+                            user.role = 'admin';
+                            loadRealUsers();
+                            showAlert(`Đã cấp quyền admin cho người dùng ảo!`, 'success');
+                            return;
+                        }
+                        
                         if (confirm('Bạn có chắc chắn muốn cấp quyền admin cho người dùng này?')) {
                             updateUserRole(userId, 'admin');
                         }
@@ -1351,18 +1406,35 @@
                     button.addEventListener('click', (e) => {
                         const userId = e.target.getAttribute('data-id');
                         const userName = e.target.getAttribute('data-name');
+                        const user = allDisplayUsers.find(u => u.id === userId);
+                        
+                        if (user && user.isDummy) {
+                            user.role = 'user';
+                            loadRealUsers();
+                            showAlert(`Đã bỏ quyền admin của người dùng ảo!`, 'success');
+                            return;
+                        }
+                        
                         if (confirm(`Bạn có chắc chắn muốn BỎ quyền admin của ${userName}?`)) {
                             updateUserRole(userId, 'user');
                         }
                     });
                 });
                 
-                // Add event listeners to ban buttons
                 document.querySelectorAll('.ban-user').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const userId = e.target.getAttribute('data-id');
                         const userEmail = e.target.getAttribute('data-email');
-                        if (confirm(`Bạn có chắc chắn muốn KHÓA tài khoản ${userEmail}?\n\nNgười dùng sẽ không thể đăng nhập và phải đăng ký lại để sử dụng web.`)) {
+                        const user = allDisplayUsers.find(u => u.id === userId);
+                        
+                        if (user && user.isDummy) {
+                            user.banned = true;
+                            loadRealUsers();
+                            showAlert(`Đã khóa tài khoản người dùng ảo!`, 'success');
+                            return;
+                        }
+                        
+                        if (confirm(`Bạn có chắc chắn muốn KHÓA tài khoản ${userEmail}?`)) {
                             banUser(userId, true);
                         }
                     });
@@ -1372,18 +1444,25 @@
                     button.addEventListener('click', (e) => {
                         const userId = e.target.getAttribute('data-id');
                         const userEmail = e.target.getAttribute('data-email');
+                        const user = allDisplayUsers.find(u => u.id === userId);
+                        
+                        if (user && user.isDummy) {
+                            user.banned = false;
+                            loadRealUsers();
+                            showAlert(`Đã mở khóa tài khoản người dùng ảo!`, 'success');
+                            return;
+                        }
+                        
                         if (confirm(`Bạn có chắc chắn muốn MỞ KHÓA tài khoản ${userEmail}?`)) {
                             banUser(userId, false);
                         }
                     });
                 });
                 
-                // Add event listeners to view vocabulary buttons
                 document.querySelectorAll('.view-vocab').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const userId = e.target.getAttribute('data-id');
                         const userName = e.target.getAttribute('data-name');
-                        // Switch to vocabulary tab and filter by user
                         document.querySelector('[data-tab="vocabulary"]').click();
                         document.getElementById('vocab-user-filter').value = userId;
                         loadUserVocabulary(userId);
@@ -1391,54 +1470,38 @@
                     });
                 });
                 
-                // Add event listeners to view analytics buttons
-                document.querySelectorAll('.view-analytics').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const userId = e.target.getAttribute('data-id');
-                        const userName = e.target.getAttribute('data-name');
-                        // Switch to analytics tab and show user-specific analytics
-                        document.querySelector('[data-tab="analytics"]').click();
-                        document.getElementById('analytics-user-filter').value = userId;
-                        loadAnalyticsData(userId);
-                        showAlert(`Đang hiển thị đánh giá của: ${userName}`, 'success');
-                    });
-                });
-                
-                // Populate user filter in vocabulary tab
                 const userFilter = document.getElementById('vocab-user-filter');
                 userFilter.innerHTML = '<option value="">Tất cả người dùng</option>';
-                snapshot.forEach(doc => {
-                    const user = doc.data();
+                
+                allDisplayUsers.forEach(user => {
                     const option = document.createElement('option');
-                    option.value = doc.id;
-                    option.textContent = `${user.name || 'Không tên'} (${user.email}) ${user.role === 'admin' ? '- ADMIN' : ''}`;
+                    option.value = user.id;
+                    option.textContent = `${user.name} (${user.email})`;
                     userFilter.appendChild(option);
                 });
                 
-                // Populate user filter in analytics tab - CHỈ GIỮ LẠI 2 TÙY CHỌN
                 const analyticsUserFilter = document.getElementById('analytics-user-filter');
                 analyticsUserFilter.innerHTML = '<option value="">Tất cả người dùng</option>';
                 analyticsUserFilter.innerHTML += '<option value="top-10">Top 10 người dùng tích cực</option>';
-                snapshot.forEach(doc => {
-                    const user = doc.data();
-                    if (!user.banned) { // Chỉ hiển thị người dùng không bị khóa
+                
+                allDisplayUsers.forEach(user => {
+                    if (user.isReal && !user.banned) {
                         const option = document.createElement('option');
-                        option.value = doc.id;
-                        option.textContent = `${user.name || 'Không tên'} (${user.email})`;
+                        option.value = user.id;
+                        option.textContent = `${user.name} (${user.email})`;
                         analyticsUserFilter.appendChild(option);
                     }
                 });
             });
         }
 
-        // Update user role
         function updateUserRole(userId, role) {
             db.collection('users').doc(userId).update({
                 role: role
             })
             .then(() => {
-                loadUsers();
-                showAlert(`Đã cập nhật vai trò người dùng thành ${role === 'admin' ? 'quản trị viên' : 'người dùng'}!`, 'success');
+                loadRealUsers();
+                showAlert(`Đã cập nhật vai trò người dùng!`, 'success');
             })
             .catch((error) => {
                 console.error('Error updating user role: ', error);
@@ -1446,16 +1509,15 @@
             });
         }
 
-        // Ban or unban user
         function banUser(userId, ban) {
             db.collection('users').doc(userId).update({
                 banned: ban,
                 bannedAt: ban ? firebase.firestore.FieldValue.serverTimestamp() : null
             })
             .then(() => {
-                loadUsers();
+                loadRealUsers();
                 loadDashboard();
-                showAlert(ban ? `Đã khóa tài khoản người dùng! Người dùng sẽ không thể đăng nhập.` : `Đã mở khóa tài khoản người dùng!`, 'success');
+                showAlert(ban ? `Đã khóa tài khoản người dùng!` : `Đã mở khóa tài khoản người dùng!`, 'success');
             })
             .catch((error) => {
                 console.error('Error banning user: ', error);
@@ -1463,18 +1525,19 @@
             });
         }
 
-        // Load user vocabulary
         function loadUserVocabulary(userId = null) {
             const vocabList = document.getElementById('vocabulary-list');
             const statsContainer = document.getElementById('vocab-stats-container');
             vocabList.innerHTML = '<div class="card"><p>Đang tải từ vựng...</p></div>';
             statsContainer.innerHTML = '';
             
-            // Lấy tất cả người dùng nếu chưa có
             if (Object.keys(allUsers).length === 0) {
                 db.collection('users').get().then(snapshot => {
                     snapshot.forEach(doc => {
                         allUsers[doc.id] = doc.data();
+                    });
+                    dummyUsers.forEach(dummy => {
+                        allUsers[dummy.id] = dummy;
                     });
                     loadAllUserVocabulary(userId);
                 });
@@ -1483,41 +1546,62 @@
             }
         }
 
-        // Load tất cả từ vựng từ tất cả người dùng
         function loadAllUserVocabulary(userId = null) {
-            if (Object.keys(allUsers).length === 0) {
-                console.error('Không có dữ liệu người dùng');
-                return;
+            const vocabPromises = [];
+            let userIds = [];
+            
+            if (userId) {
+                userIds = [userId];
+            } else {
+                userIds = Object.keys(allUsers);
             }
             
-            const vocabPromises = [];
-            const userIds = userId ? [userId] : Object.keys(allUsers);
+            allVocabItems = allVocabItems.filter(item => !item.isDummy);
             
-            userIds.forEach(userId => {
+            dummyUsers.forEach(dummy => {
+                if (userIds.includes(dummy.id)) {
+                    const numVocab = dummy.vocabCount;
+                    for (let i = 0; i < numVocab; i++) {
+                        const randomIndex = Math.floor(Math.random() * sampleVocab.length);
+                        const vocab = sampleVocab[randomIndex];
+                        
+                        const statuses = ['learning', 'known', 'mastered'];
+                        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                        
+                        allVocabItems.push({
+                            id: `dummy_vocab_${dummy.id}_${i}`,
+                            userId: dummy.id,
+                            word: vocab.word,
+                            meaning: vocab.meaning,
+                            status: randomStatus,
+                            category: vocab.category,
+                            createdAt: new Date(),
+                            isDummy: true
+                        });
+                    }
+                }
+            });
+            
+            const realUserIds = userIds.filter(id => !dummyUsers.some(d => d.id === id));
+            
+            realUserIds.forEach(userId => {
                 vocabPromises.push(
                     db.collection('users').doc(userId).collection('cards').get()
                         .then(snapshot => {
-                            const userVocab = [];
                             snapshot.forEach(doc => {
                                 const data = doc.data();
-                                userVocab.push({
+                                allVocabItems.push({
                                     id: doc.id,
                                     userId: userId,
                                     ...data
                                 });
                             });
-                            return userVocab;
                         })
-                        .catch(error => {
-                            console.error(`Error loading vocab for user ${userId}:`, error);
-                            return [];
-                        })
+                        .catch(error => console.error(`Error loading vocab for user ${userId}:`, error))
                 );
             });
             
-            Promise.all(vocabPromises).then(allResults => {
-                // Gộp tất cả kết quả
-                allVocabItems = allResults.flat();
+            Promise.all(vocabPromises).then(() => {
                 totalVocabItems = allVocabItems.length;
                 
                 if (totalVocabItems === 0) {
@@ -1525,14 +1609,10 @@
                     return;
                 }
                 
-                console.log(`Đã tìm thấy ${totalVocabItems} từ vựng từ ${userIds.length} người dùng`);
-                
-                // Áp dụng bộ lọc và hiển thị
                 applyFiltersAndDisplay();
             });
         }
 
-        // Áp dụng bộ lọc và hiển thị
         function applyFiltersAndDisplay() {
             const statusFilter = document.getElementById('vocab-status-filter').value;
             const searchFilter = document.getElementById('vocab-search').value.toLowerCase();
@@ -1540,12 +1620,10 @@
             
             let filteredVocab = allVocabItems;
             
-            // Lọc theo user
             if (userFilter) {
                 filteredVocab = filteredVocab.filter(item => item.userId === userFilter);
             }
             
-            // Lọc theo trạng thái
             if (statusFilter) {
                 filteredVocab = filteredVocab.filter(item => {
                     const status = item.status || 'learning';
@@ -1553,20 +1631,16 @@
                 });
             }
             
-            // Lọc theo tìm kiếm
             if (searchFilter) {
                 filteredVocab = filteredVocab.filter(item => {
                     const word = item.word || '';
                     const meaning = item.meaning || '';
-                    const example = item.example || '';
                     
                     return word.toLowerCase().includes(searchFilter) || 
-                           meaning.toLowerCase().includes(searchFilter) ||
-                           example.toLowerCase().includes(searchFilter);
+                           meaning.toLowerCase().includes(searchFilter);
                 });
             }
             
-            // Tính thống kê
             const stats = {
                 total: filteredVocab.length,
                 learning: 0,
@@ -1579,18 +1653,14 @@
                 if (stats[status] !== undefined) {
                     stats[status]++;
                 } else {
-                    stats.learning++; // Mặc định là learning nếu không có status
+                    stats.learning++;
                 }
             });
             
-            // Hiển thị thống kê
             displayStatistics(stats);
-            
-            // Hiển thị bảng với phân trang
             displayVocabTable(filteredVocab);
         }
 
-        // Hiển thị thống kê
         function displayStatistics(stats) {
             const statsContainer = document.getElementById('vocab-stats-container');
             statsContainer.innerHTML = `
@@ -1604,12 +1674,10 @@
             `;
         }
 
-        // Hiển thị bảng từ vựng với phân trang
         function displayVocabTable(vocabItems) {
             const vocabList = document.getElementById('vocabulary-list');
             const totalPages = Math.ceil(vocabItems.length / itemsPerPage);
             
-            // Tính chỉ số bắt đầu và kết thúc
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             const pageItems = vocabItems.slice(startIndex, endIndex);
@@ -1620,7 +1688,6 @@
                 return;
             }
             
-            // Tạo bảng
             let tableHTML = `
                 <table>
                     <thead>
@@ -1641,7 +1708,6 @@
                 const user = allUsers[item.userId];
                 const status = item.status || 'learning';
                 
-                // Chuyển đổi status sang text
                 const statusText = {
                     'learning': 'Đang học',
                     'known': 'Đã biết',
@@ -1678,10 +1744,8 @@
             tableHTML += `</tbody></table>`;
             vocabList.innerHTML = tableHTML;
             
-            // Hiển thị phân trang
             displayPagination(totalPages);
             
-            // Thêm sự kiện cho nút chi tiết
             document.querySelectorAll('.view-vocab-detail').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const userId = e.target.getAttribute('data-userid');
@@ -1691,14 +1755,12 @@
             });
         }
 
-        // Hiển thị phân trang
         function displayPagination(totalPages) {
             const paginationContainer = document.getElementById('vocab-pagination');
             paginationContainer.innerHTML = '';
             
             if (totalPages <= 1) return;
             
-            // Nút đầu
             if (currentPage > 1) {
                 const firstButton = document.createElement('button');
                 firstButton.textContent = '«';
@@ -1709,7 +1771,6 @@
                 paginationContainer.appendChild(firstButton);
             }
             
-            // Nút trước
             if (currentPage > 1) {
                 const prevButton = document.createElement('button');
                 prevButton.textContent = '<';
@@ -1720,7 +1781,6 @@
                 paginationContainer.appendChild(prevButton);
             }
             
-            // Các số trang
             const startPage = Math.max(1, currentPage - 2);
             const endPage = Math.min(totalPages, currentPage + 2);
             
@@ -1737,7 +1797,6 @@
                 paginationContainer.appendChild(pageButton);
             }
             
-            // Nút sau
             if (currentPage < totalPages) {
                 const nextButton = document.createElement('button');
                 nextButton.textContent = '>';
@@ -1748,7 +1807,6 @@
                 paginationContainer.appendChild(nextButton);
             }
             
-            // Nút cuối
             if (currentPage < totalPages) {
                 const lastButton = document.createElement('button');
                 lastButton.textContent = '»';
@@ -1760,101 +1818,62 @@
             }
         }
 
-        // Show vocabulary detail in modal
         function showVocabDetail(userId, vocabId) {
-            db.collection('users').doc(userId).collection('cards').doc(vocabId).get()
-                .then(vocabDoc => {
-                    if (!vocabDoc.exists) return;
-                    
-                    const vocab = vocabDoc.data();
-                    const user = allUsers[userId];
-                    
-                    const modal = document.getElementById('vocab-modal');
-                    const modalBody = document.getElementById('modal-body');
-                    
-                    const status = vocab.status || 'learning';
-                    const statusText = {
-                        'learning': 'Đang học',
-                        'known': 'Đã biết',
-                        'mastered': 'Đã thuộc'
-                    }[status] || status;
-                    
-                    const statusClass = {
-                        'learning': 'status-learning',
-                        'known': 'status-known',
-                        'mastered': 'status-mastered'
-                    }[status] || '';
-                    
-                    const createdAt = vocab.createdAt ? 
-                        vocab.createdAt.toDate ? 
-                        vocab.createdAt.toDate().toLocaleString('vi-VN') : 
-                        new Date(vocab.createdAt).toLocaleString('vi-VN') : 
-                        'Không rõ';
-                    
-                    modalBody.innerHTML = `
-                        <div class="card">
-                            <h3>${vocab.word || 'Không có'} - ${vocab.meaning || 'Không có'}</h3>
-                            <p><strong>Người dùng:</strong> ${user ? (user.name || user.email) : userId}</p>
-                            <p><strong>Trạng thái:</strong> <span class="status-badge ${statusClass}">${statusText}</span></p>
-                            <p><strong>Ngày tạo:</strong> ${createdAt}</p>
-                            ${vocab.example ? `<p><strong>Ví dụ:</strong> ${vocab.example}</p>` : ''}
-                            ${vocab.category ? `<p><strong>Chủ đề:</strong> ${vocab.category}</p>` : ''}
-                            <p><strong>ID từ vựng:</strong> <small>${vocabId}</small></p>
-                            <p><strong>ID người dùng:</strong> <small>${userId}</small></p>
-                            <div class="card-actions">
-                                <button class="btn-danger delete-vocab-admin" data-userid="${userId}" data-vocabid="${vocabId}">Xóa từ vựng này</button>
-                            </div>
-                        </div>
-                    `;
-                    
-                    modal.style.display = 'block';
-                    
-                    // Thêm sự kiện cho nút xóa
-                    document.querySelector('.delete-vocab-admin').addEventListener('click', (e) => {
-                        const userId = e.target.getAttribute('data-userid');
-                        const vocabId = e.target.getAttribute('data-vocabid');
-                        const word = vocab.word || 'từ vựng này';
-                        
-                        if (confirm(`Bạn có chắc chắn muốn xóa từ "${word}" của người dùng này?`)) {
-                            deleteUserVocabulary(userId, vocabId);
-                        }
-                    });
-                });
+            const item = allVocabItems.find(i => i.id === vocabId && i.userId === userId);
+            if (!item) return;
+            
+            const user = allUsers[userId];
+            const modal = document.getElementById('vocab-modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            const status = item.status || 'learning';
+            const statusText = {
+                'learning': 'Đang học',
+                'known': 'Đã biết',
+                'mastered': 'Đã thuộc'
+            }[status] || status;
+            
+            const statusClass = {
+                'learning': 'status-learning',
+                'known': 'status-known',
+                'mastered': 'status-mastered'
+            }[status] || '';
+            
+            const createdAt = item.createdAt ? 
+                (item.createdAt.toDate ? 
+                    item.createdAt.toDate().toLocaleString('vi-VN') : 
+                    new Date(item.createdAt).toLocaleString('vi-VN')) : 
+                'Không rõ';
+            
+            modalBody.innerHTML = `
+                <div class="card">
+                    <h3>${item.word || 'Không có'} - ${item.meaning || 'Không có'}</h3>
+                    <p><strong>Người dùng:</strong> ${user ? (user.name || user.email) : userId}</p>
+                    <p><strong>Trạng thái:</strong> <span class="status-badge ${statusClass}">${statusText}</span></p>
+                    <p><strong>Ngày tạo:</strong> ${createdAt}</p>
+                    ${item.example ? `<p><strong>Ví dụ:</strong> ${item.example}</p>` : ''}
+                    ${item.category ? `<p><strong>Chủ đề:</strong> ${item.category}</p>` : ''}
+                    <p><strong>ID từ vựng:</strong> <small>${vocabId}</small></p>
+                    <p><strong>ID người dùng:</strong> <small>${userId}</small></p>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
         }
 
-        // Xóa từ vựng của người dùng
-        function deleteUserVocabulary(userId, vocabId) {
-            db.collection('users').doc(userId).collection('cards').doc(vocabId).delete()
-                .then(() => {
-                    showAlert('Đã xóa từ vựng của người dùng!', 'success');
-                    document.getElementById('vocab-modal').style.display = 'none';
-                    
-                    // Cập nhật lại danh sách
-                    const currentUserId = document.getElementById('vocab-user-filter').value;
-                    loadUserVocabulary(currentUserId || null);
-                    loadTotalUserVocabularyCount();
-                })
-                .catch((error) => {
-                    console.error('Error deleting user vocabulary:', error);
-                    showAlert('Có lỗi xảy ra khi xóa từ vựng!', 'error');
-                });
-        }
+        // ================== PHẦN ĐÁNH GIÁ VÀ TỔNG KẾT (ĐÃ SỬA LỖI) ==================
 
-        // ================== CHỨC NĂNG ĐÁNH GIÁ VÀ TỔNG KẾT ==================
-
-        // Load analytics data
         function loadAnalyticsData(userId = null) {
             document.getElementById('user-details-list').innerHTML = '<div class="card"><p>Đang tải dữ liệu đánh giá...</p></div>';
             document.getElementById('user-ranking-table').innerHTML = '<p>Đang tải bảng xếp hạng...</p>';
             
             analyticsData = {};
             
-            // Lấy tất cả người dùng
             db.collection('users').get().then(usersSnapshot => {
                 const users = [];
                 usersSnapshot.forEach(doc => {
                     const userData = doc.data();
-                    if (!userData.banned) { // Chỉ lấy người dùng không bị khóa
+                    if (!userData.banned) {
                         users.push({
                             id: doc.id,
                             ...userData
@@ -1864,209 +1883,225 @@
                 
                 analyticsData.users = users;
                 analyticsData.totalUsers = users.length;
+                analyticsData.activeUsers = 0;
+                analyticsData.totalLearned = 0;
+                analyticsData.totalMastered = 0;
+                analyticsData.userStats = {};
+                analyticsData.userGroups = {
+                    beginner: 0,
+                    intermediate: 0,
+                    advanced: 0,
+                    expert: 0
+                };
                 
-                // Lấy dữ liệu từ vựng của tất cả người dùng
-                loadAllUserVocabForAnalytics(userId);
+                const today = new Date();
+                const last30Days = [];
+                const last30DaysLabels = [];
+                for (let i = 29; i >= 0; i--) {
+                    const date = new Date();
+                    date.setDate(date.getDate() - i);
+                    last30Days.push(date.toISOString().split('T')[0]);
+                    last30DaysLabels.push(date.getDate() + '/' + (date.getMonth() + 1));
+                }
+                
+                analyticsData.dailyData = {
+                    labels: last30DaysLabels,
+                    learnedData: new Array(30).fill(0),
+                    masteredData: new Array(30).fill(0)
+                };
+                
+                if (users.length === 0) {
+                    updateAnalyticsUI();
+                    return;
+                }
+                
+                let usersToProcess = users;
+                
+                if (userId && userId !== 'top-10') {
+                    usersToProcess = users.filter(u => u.id === userId);
+                }
+                
+                loadUserVocabForAnalytics(usersToProcess, userId);
+            }).catch(error => {
+                console.error('Error loading users for analytics:', error);
+                document.getElementById('user-details-list').innerHTML = '<div class="card error"><p>Có lỗi khi tải dữ liệu người dùng!</p></div>';
             });
         }
 
-        // Load tất cả từ vựng của người dùng cho đánh giá
-        function loadAllUserVocabForAnalytics(userId = null) {
-            const users = analyticsData.users;
-            const userStats = {};
-            
-            // Khởi tạo thống kê
-            analyticsData.totalLearned = 0;
-            analyticsData.totalMastered = 0;
-            analyticsData.activeUsers = 0;
-            
-            if (users.length === 0) {
+        function loadUserVocabForAnalytics(usersToProcess, filterType = null) {
+            if (!usersToProcess || usersToProcess.length === 0) {
                 updateAnalyticsUI();
                 return;
             }
             
-            // Lấy từ vựng của mỗi người dùng
+            let completedCount = 0;
+            
+            usersToProcess.forEach(user => {
+                db.collection('users').doc(user.id).collection('cards').get()
+                    .then(snapshot => {
+                        const userVocab = {
+                            total: 0,
+                            learning: 0,
+                            known: 0,
+                            mastered: 0,
+                            words: []
+                        };
+                        
+                        snapshot.forEach(doc => {
+                            const card = doc.data();
+                            userVocab.total++;
+                            userVocab.words.push(card);
+                            
+                            const status = card.status || 'learning';
+                            if (status === 'learning') userVocab.learning++;
+                            else if (status === 'known') userVocab.known++;
+                            else if (status === 'mastered') userVocab.mastered++;
+                        });
+                        
+                        analyticsData.userStats[user.id] = {
+                            userInfo: user,
+                            vocab: userVocab,
+                            learnedTotal: userVocab.known + userVocab.mastered,
+                            masteredTotal: userVocab.mastered,
+                            activityLevel: calculateActivityLevel(userVocab.total, userVocab.mastered)
+                        };
+                        
+                        if (userVocab.total > 0) analyticsData.activeUsers++;
+                        analyticsData.totalLearned += userVocab.known + userVocab.mastered;
+                        analyticsData.totalMastered += userVocab.mastered;
+                        
+                        if (userVocab.total <= 10) {
+                            analyticsData.userGroups.beginner++;
+                        } else if (userVocab.total <= 50) {
+                            analyticsData.userGroups.intermediate++;
+                        } else if (userVocab.total <= 200) {
+                            analyticsData.userGroups.advanced++;
+                        } else {
+                            analyticsData.userGroups.expert++;
+                        }
+                        
+                        loadUserLearningHistory(user.id);
+                        
+                        completedCount++;
+                        
+                        if (completedCount === usersToProcess.length) {
+                            if (filterType === 'top-10') {
+                                filterTop10Users();
+                            }
+                            
+                            setTimeout(() => {
+                                updateAnalyticsUI();
+                            }, 500);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Error loading vocab for user ${user.id}:`, error);
+                        
+                        analyticsData.userStats[user.id] = {
+                            userInfo: user,
+                            vocab: { total: 0, learning: 0, known: 0, mastered: 0, words: [] },
+                            learnedTotal: 0,
+                            masteredTotal: 0,
+                            activityLevel: 'Không hoạt động'
+                        };
+                        
+                        analyticsData.userGroups.beginner++;
+                        
+                        completedCount++;
+                        
+                        if (completedCount === usersToProcess.length) {
+                            if (filterType === 'top-10') {
+                                filterTop10Users();
+                            }
+                            updateAnalyticsUI();
+                        }
+                    });
+            });
+        }
+
+        function loadUserLearningHistory(userId) {
+            const today = new Date();
             const promises = [];
             
-            users.forEach(user => {
-                // Xử lý filter top-10
-                if (userId === 'top-10') {
-                    // Chúng ta sẽ xử lý sau khi có tất cả dữ liệu
-                } else if (userId && user.id !== userId) {
-                    return; // Bỏ qua nếu không phải người dùng được chọn
-                }
-                
-                promises.push(
-                    db.collection('users').doc(user.id).collection('cards').get()
-                        .then(snapshot => {
-                            const userVocab = {
-                                total: 0,
-                                learning: 0,
-                                known: 0,
-                                mastered: 0,
-                                words: []
-                            };
-                            
-                            snapshot.forEach(doc => {
-                                const card = doc.data();
-                                userVocab.total++;
-                                userVocab.words.push(card);
-                                
-                                const status = card.status || 'learning';
-                                if (status === 'learning') userVocab.learning++;
-                                else if (status === 'known') userVocab.known++;
-                                else if (status === 'mastered') userVocab.mastered++;
-                            });
-                            
-                            userStats[user.id] = {
-                                userInfo: user,
-                                vocab: userVocab,
-                                learnedTotal: userVocab.known + userVocab.mastered,
-                                masteredTotal: userVocab.mastered,
-                                activityLevel: calculateActivityLevel(userVocab.total, userVocab.mastered)
-                            };
-                            
-                            // Cập nhật tổng số
-                            if (userVocab.total > 0) analyticsData.activeUsers++;
-                            analyticsData.totalLearned += userVocab.known + userVocab.mastered;
-                            analyticsData.totalMastered += userVocab.mastered;
-                        })
-                );
-            });
-            
-            Promise.all(promises).then(() => {
-                analyticsData.userStats = userStats;
-                
-                // Xử lý filter top-10
-                if (userId === 'top-10') {
-                    filterTop10Users();
-                }
-                
-                // Lấy dữ liệu lịch sử học tập cho biểu đồ
-                loadLearningHistoryForAnalytics(userId);
-            });
-        }
-
-        // Filter top 10 users
-        function filterTop10Users() {
-            const userStats = analyticsData.userStats;
-            if (!userStats) return;
-            
-            // Sắp xếp người dùng theo điểm số
-            const sortedUsers = Object.entries(userStats).sort((a, b) => {
-                const scoreA = a[1].vocab.mastered * 3 + a[1].vocab.known * 2 + a[1].vocab.learning;
-                const scoreB = b[1].vocab.mastered * 3 + b[1].vocab.known * 2 + b[1].vocab.learning;
-                return scoreB - scoreA;
-            });
-            
-            // Chỉ giữ lại top 10
-            const top10UserIds = sortedUsers.slice(0, 10).map(entry => entry[0]);
-            
-            // Lọc chỉ giữ lại top 10 trong userStats
-            const filteredUserStats = {};
-            top10UserIds.forEach(userId => {
-                if (userStats[userId]) {
-                    filteredUserStats[userId] = userStats[userId];
-                }
-            });
-            
-            analyticsData.userStats = filteredUserStats;
-            
-            // Cập nhật lại tổng số
-            analyticsData.activeUsers = Object.keys(filteredUserStats).length;
-            analyticsData.totalLearned = 0;
-            analyticsData.totalMastered = 0;
-            
-            Object.values(filteredUserStats).forEach(userStat => {
-                analyticsData.totalLearned += userStat.vocab.known + userStat.vocab.mastered;
-                analyticsData.totalMastered += userStat.vocab.mastered;
-            });
-        }
-
-        // Load lịch sử học tập - TỰ ĐỘNG LẤY 30 NGÀY GẦN NHẤT
-        function loadLearningHistoryForAnalytics(userId = null) {
-            const users = analyticsData.users;
-            const today = new Date();
-            
-            // Tạo mảng 30 ngày gần nhất
-            const last30Days = [];
             for (let i = 29; i >= 0; i--) {
                 const date = new Date();
                 date.setDate(date.getDate() - i);
-                last30Days.push(date.toISOString().split('T')[0]);
+                const dateStr = date.toISOString().split('T')[0];
+                
+                promises.push(
+                    db.collection('users').doc(userId).collection('learningHistory').doc(dateStr).get()
+                        .then(doc => {
+                            if (doc.exists) {
+                                const data = doc.data();
+                                const index = 29 - i;
+                                analyticsData.dailyData.learnedData[index] += data.learnedToday || 0;
+                                analyticsData.dailyData.masteredData[index] += data.masteredToday || 0;
+                            }
+                        })
+                        .catch(error => {
+                            console.error(`Error loading history for user ${userId} on date:`, error);
+                        })
+                );
             }
             
-            analyticsData.dailyData = {
-                labels: last30Days.map(date => {
-                    const d = new Date(date);
-                    return d.getDate() + '/' + (d.getMonth() + 1);
-                }),
-                learnedData: new Array(30).fill(0),
-                masteredData: new Array(30).fill(0)
-            };
-            
-            // Lấy lịch sử học tập của mỗi người dùng
-            const historyPromises = [];
-            
-            const usersToProcess = userId === 'top-10' 
-                ? Object.values(analyticsData.userStats).map(stat => stat.userInfo)
-                : analyticsData.users;
-            
-            usersToProcess.forEach(user => {
-                if (userId && userId !== 'top-10' && user.id !== userId) return;
-                
-                last30Days.forEach((date, index) => {
-                    historyPromises.push(
-                        db.collection('users').doc(user.id).collection('learningHistory').doc(date).get()
-                            .then(doc => {
-                                if (doc.exists) {
-                                    const data = doc.data();
-                                    analyticsData.dailyData.learnedData[index] += data.learnedToday || 0;
-                                    analyticsData.dailyData.masteredData[index] += data.masteredToday || 0;
-                                }
-                            })
-                    );
-                });
-            });
-            
-            Promise.all(historyPromises).then(() => {
-                // Phân loại người dùng theo nhóm tiến độ
-                classifyUsersByProgress();
-                
-                // Cập nhật giao diện
-                updateAnalyticsUI();
-                
-                // Tạo biểu đồ
+            Promise.all(promises).then(() => {
                 createCharts();
             });
         }
 
-        // Phân loại người dùng theo tiến độ
-        function classifyUsersByProgress() {
+        function filterTop10Users() {
             const userStats = analyticsData.userStats;
+            if (!userStats) return;
+            
+            const userArray = Object.entries(userStats).map(([id, stat]) => ({
+                id,
+                ...stat
+            }));
+            
+            userArray.sort((a, b) => {
+                const scoreA = a.vocab.mastered * 3 + a.vocab.known * 2 + a.vocab.learning;
+                const scoreB = b.vocab.mastered * 3 + b.vocab.known * 2 + b.vocab.learning;
+                return scoreB - scoreA;
+            });
+            
+            const top10Ids = userArray.slice(0, 10).map(item => item.id);
+            
+            const newUserStats = {};
+            top10Ids.forEach(id => {
+                if (userStats[id]) {
+                    newUserStats[id] = userStats[id];
+                }
+            });
+            
+            analyticsData.userStats = newUserStats;
+            
+            analyticsData.activeUsers = 0;
+            analyticsData.totalLearned = 0;
+            analyticsData.totalMastered = 0;
             analyticsData.userGroups = {
-                beginner: 0,    // 0-10 từ
-                intermediate: 0, // 11-50 từ
-                advanced: 0,    // 51-200 từ
-                expert: 0       // 201+ từ
+                beginner: 0,
+                intermediate: 0,
+                advanced: 0,
+                expert: 0
             };
             
-            for (const userId in userStats) {
-                const totalWords = userStats[userId].vocab.total;
+            Object.values(newUserStats).forEach(userStat => {
+                if (userStat.vocab.total > 0) analyticsData.activeUsers++;
+                analyticsData.totalLearned += userStat.vocab.known + userStat.vocab.mastered;
+                analyticsData.totalMastered += userStat.vocab.mastered;
                 
-                if (totalWords <= 10) {
+                if (userStat.vocab.total <= 10) {
                     analyticsData.userGroups.beginner++;
-                } else if (totalWords <= 50) {
+                } else if (userStat.vocab.total <= 50) {
                     analyticsData.userGroups.intermediate++;
-                } else if (totalWords <= 200) {
+                } else if (userStat.vocab.total <= 200) {
                     analyticsData.userGroups.advanced++;
                 } else {
                     analyticsData.userGroups.expert++;
                 }
-            }
+            });
         }
 
-        // Tính toán mức độ hoạt động
         function calculateActivityLevel(totalWords, masteredWords) {
             if (totalWords === 0) return 'Không hoạt động';
             if (totalWords >= 200) return 'Xuất sắc';
@@ -2075,55 +2110,39 @@
             return 'Bắt đầu';
         }
 
-        // Cập nhật giao diện đánh giá
         function updateAnalyticsUI() {
-            // Cập nhật thống kê tổng quan
             document.getElementById('total-active-users').textContent = analyticsData.activeUsers || 0;
             document.getElementById('total-learned').textContent = analyticsData.totalLearned || 0;
             document.getElementById('total-mastered').textContent = analyticsData.totalMastered || 0;
             
             const avgPerUser = analyticsData.activeUsers > 0 ? 
-                Math.round((analyticsData.totalLearned + analyticsData.totalMastered) / analyticsData.activeUsers) : 0;
+                Math.round((analyticsData.totalLearned) / analyticsData.activeUsers) : 0;
             document.getElementById('avg-per-user').textContent = avgPerUser;
             
-            // Cập nhật phân phối người dùng
             document.getElementById('beginner-users').textContent = analyticsData.userGroups?.beginner || 0;
             document.getElementById('intermediate-users').textContent = analyticsData.userGroups?.intermediate || 0;
             document.getElementById('advanced-users').textContent = analyticsData.userGroups?.advanced || 0;
             document.getElementById('expert-users').textContent = analyticsData.userGroups?.expert || 0;
             
-            // Tạo bảng xếp hạng
             createUserRankingTable();
-            
-            // Tạo danh sách chi tiết người dùng
             createUserDetailsList();
-            
-            // Đánh giá tổng thể
             evaluateOverallProgress();
         }
 
-        // Tạo bảng xếp hạng người dùng
         function createUserRankingTable() {
             const userStats = analyticsData.userStats;
-            if (!userStats) {
+            if (!userStats || Object.keys(userStats).length === 0) {
                 document.getElementById('user-ranking-table').innerHTML = '<p>Không có dữ liệu người dùng</p>';
                 return;
             }
             
-            // Chuyển đổi object thành array và sắp xếp
             const rankedUsers = Object.values(userStats).sort((a, b) => {
                 const scoreA = a.vocab.mastered * 3 + a.vocab.known * 2 + a.vocab.learning;
                 const scoreB = b.vocab.mastered * 3 + b.vocab.known * 2 + b.vocab.learning;
                 return scoreB - scoreA;
             });
             
-            // Giới hạn top 10 nếu có quá nhiều
             const displayUsers = rankedUsers.slice(0, 10);
-            
-            if (displayUsers.length === 0) {
-                document.getElementById('user-ranking-table').innerHTML = '<p>Không có dữ liệu người dùng</p>';
-                return;
-            }
             
             let tableHTML = `
                 <table>
@@ -2150,7 +2169,7 @@
                 tableHTML += `
                     <tr>
                         <td>${index + 1}</td>
-                        <td>${user.name || 'Không tên'} (${user.email})</td>
+                        <td>${user.name || 'Không tên'}<br><small>${user.email}</small></td>
                         <td>${vocab.total}</td>
                         <td>${vocab.learning}</td>
                         <td>${vocab.known}</td>
@@ -2165,10 +2184,9 @@
             document.getElementById('user-ranking-table').innerHTML = tableHTML;
         }
 
-        // Tạo danh sách chi tiết người dùng
         function createUserDetailsList() {
             const userStats = analyticsData.userStats;
-            if (!userStats) {
+            if (!userStats || Object.keys(userStats).length === 0) {
                 document.getElementById('user-details-list').innerHTML = '<p>Không có dữ liệu người dùng</p>';
                 return;
             }
@@ -2176,14 +2194,9 @@
             let detailsHTML = '';
             const userFilter = document.getElementById('analytics-user-filter').value;
             
-            // Nếu đang filter theo 1 người dùng, chỉ hiển thị người đó
-            if (userFilter && userFilter !== 'top-10') {
-                const userStat = userStats[userFilter];
-                if (userStat) {
-                    detailsHTML = createUserDetailCard(userStat);
-                }
+            if (userFilter && userFilter !== 'top-10' && userStats[userFilter]) {
+                detailsHTML = createUserDetailCard(userStats[userFilter]);
             } else {
-                // Hiển thị tất cả người dùng
                 const userArray = Object.values(userStats);
                 userArray.forEach(userStat => {
                     detailsHTML += createUserDetailCard(userStat);
@@ -2193,39 +2206,46 @@
             document.getElementById('user-details-list').innerHTML = detailsHTML || '<p>Không có dữ liệu người dùng</p>';
         }
 
-        // Tạo card chi tiết cho một người dùng
         function createUserDetailCard(userStat) {
             const user = userStat.userInfo;
             const vocab = userStat.vocab;
-            const learnedTotal = userStat.learnedTotal;
-            const masteredTotal = userStat.masteredTotal;
             const activityLevel = userStat.activityLevel;
             
-            // Tính tỷ lệ phần trăm
             const masteredPercent = vocab.total > 0 ? Math.round((vocab.mastered / vocab.total) * 100) : 0;
             const knownPercent = vocab.total > 0 ? Math.round((vocab.known / vocab.total) * 100) : 0;
             
             return `
                 <div class="card">
-                    <h3>${user.name || 'Không tên'} (${user.email}) 
+                    <h3>${user.name || 'Không tên'} 
+                        <small>${user.email}</small>
                         <span class="status-badge ${getLevelClass(activityLevel)}">${activityLevel}</span>
                     </h3>
-                    <div class="progress-summary">
-                        <div class="progress-item">
-                            <div class="label">Tổng từ vựng</div>
-                            <div class="value">${vocab.total}</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 15px 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #333;">${vocab.total}</div>
+                            <div style="font-size: 12px; color: #666;">Tổng từ</div>
                         </div>
-                        <div class="progress-item">
-                            <div class="label">Đang học</div>
-                            <div class="value">${vocab.learning}</div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #2196F3;">${vocab.learning}</div>
+                            <div style="font-size: 12px; color: #666;">Đang học</div>
                         </div>
-                        <div class="progress-item">
-                            <div class="label">Đã biết</div>
-                            <div class="value">${vocab.known} (${knownPercent}%)</div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #4CAF50;">${vocab.known}</div>
+                            <div style="font-size: 12px; color: #666;">Đã biết</div>
                         </div>
-                        <div class="progress-item">
-                            <div class="label">Đã thuộc</div>
-                            <div class="value">${vocab.mastered} (${masteredPercent}%)</div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #FF9800;">${vocab.mastered}</div>
+                            <div style="font-size: 12px; color: #666;">Đã thuộc</div>
+                        </div>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <div style="background: #f0f0f0; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #4CAF50; width: ${knownPercent}%; height: 100%; float: left;"></div>
+                            <div style="background: #FF9800; width: ${masteredPercent}%; height: 100%; float: left;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 5px;">
+                            <span>Đã biết: ${knownPercent}%</span>
+                            <span>Đã thuộc: ${masteredPercent}%</span>
                         </div>
                     </div>
                     <div class="card-actions">
@@ -2235,7 +2255,6 @@
             `;
         }
 
-        // Lấy class CSS cho mức độ
         function getLevelClass(level) {
             switch(level) {
                 case 'Xuất sắc': return 'status-mastered';
@@ -2247,9 +2266,9 @@
             }
         }
 
-        // Tạo biểu đồ
         function createCharts() {
-            // Hủy biểu đồ cũ nếu có
+            if (!analyticsData.dailyData) return;
+            
             if (overallProgressChart) {
                 overallProgressChart.destroy();
             }
@@ -2257,105 +2276,106 @@
                 userDistributionChart.destroy();
             }
             
-            // Biểu đồ tiến độ tổng hợp
-            const overallCtx = document.getElementById('overall-progress-chart').getContext('2d');
-            overallProgressChart = new Chart(overallCtx, {
-                type: 'line',
-                data: {
-                    labels: analyticsData.dailyData.labels || [],
-                    datasets: [
-                        {
-                            label: 'Từ đã học (tất cả người dùng)',
-                            data: analyticsData.dailyData.learnedData || [],
-                            borderColor: '#2196F3',
-                            backgroundColor: 'rgba(33, 150, 243, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        },
-                        {
-                            label: 'Từ đã thuộc (tất cả người dùng)',
-                            data: analyticsData.dailyData.masteredData || [],
-                            borderColor: '#4CAF50',
-                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1
+            const overallCtx = document.getElementById('overall-progress-chart');
+            if (overallCtx) {
+                overallProgressChart = new Chart(overallCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: analyticsData.dailyData.labels || [],
+                        datasets: [
+                            {
+                                label: 'Từ đã học (tất cả người dùng)',
+                                data: analyticsData.dailyData.learnedData || [],
+                                borderColor: '#2196F3',
+                                backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            },
+                            {
+                                label: 'Từ đã thuộc (tất cả người dùng)',
+                                data: analyticsData.dailyData.masteredData || [],
+                                borderColor: '#4CAF50',
+                                backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                                tension: 0.3,
+                                fill: true
                             }
-                        }
-                    }
-                }
-            });
-            
-            // Biểu đồ phân phối người dùng
-            const distributionCtx = document.getElementById('user-distribution-chart').getContext('2d');
-            userDistributionChart = new Chart(distributionCtx, {
-                type: 'pie',
-                data: {
-                    labels: ['Bắt đầu (0-10 từ)', 'Trung bình (11-50 từ)', 'Tích cực (51-200 từ)', 'Xuất sắc (201+ từ)'],
-                    datasets: [{
-                        data: [
-                            analyticsData.userGroups?.beginner || 0,
-                            analyticsData.userGroups?.intermediate || 0,
-                            analyticsData.userGroups?.advanced || 0,
-                            analyticsData.userGroups?.expert || 0
-                        ],
-                        backgroundColor: [
-                            '#FF6384',
-                            '#36A2EB',
-                            '#FFCE56',
-                            '#4BC0C0'
-                        ],
-                        hoverBackgroundColor: [
-                            '#FF6384',
-                            '#36A2EB',
-                            '#FFCE56',
-                            '#4BC0C0'
                         ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
+                            }
                         },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const label = context.label || '';
-                                    const value = context.raw || 0;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
-                                    return `${label}: ${value} người dùng (${percentage}%)`;
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
                                 }
                             }
                         }
                     }
-                }
-            });
+                });
+            }
+            
+            const distributionCtx = document.getElementById('user-distribution-chart');
+            if (distributionCtx) {
+                userDistributionChart = new Chart(distributionCtx.getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['Bắt đầu (0-10 từ)', 'Trung bình (11-50 từ)', 'Tích cực (51-200 từ)', 'Xuất sắc (201+ từ)'],
+                        datasets: [{
+                            data: [
+                                analyticsData.userGroups?.beginner || 0,
+                                analyticsData.userGroups?.intermediate || 0,
+                                analyticsData.userGroups?.advanced || 0,
+                                analyticsData.userGroups?.expert || 0
+                            ],
+                            backgroundColor: [
+                                '#FF6384',
+                                '#36A2EB',
+                                '#FFCE56',
+                                '#4BC0C0'
+                            ],
+                            hoverBackgroundColor: [
+                                '#FF6384',
+                                '#36A2EB',
+                                '#FFCE56',
+                                '#4BC0C0'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.raw || 0;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                                        return `${label}: ${value} người dùng (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
         }
 
-        // Đánh giá tổng thể hệ thống
         function evaluateOverallProgress() {
             const evaluationElement = document.getElementById('overall-evaluation');
             evaluationElement.className = 'evaluation';
@@ -2368,43 +2388,38 @@
                 return;
             }
             
-            const avgWordsPerUser = Math.round((analyticsData.totalLearned + analyticsData.totalMastered) / analyticsData.activeUsers);
+            const avgWordsPerUser = Math.round((analyticsData.totalLearned) / analyticsData.activeUsers);
             const totalUsers = analyticsData.totalUsers;
-            const activeRate = Math.round((analyticsData.activeUsers / totalUsers) * 100);
+            const activeRate = totalUsers > 0 ? Math.round((analyticsData.activeUsers / totalUsers) * 100) : 0;
             
-            let evaluationText = '';
             let evaluationClass = '';
             
             if (avgWordsPerUser >= 50) {
-                evaluationText = 'Xuất sắc!';
                 evaluationClass = 'excellent';
                 evaluationElement.innerHTML = `
-                    <h3>${evaluationText}</h3>
+                    <h3>Xuất sắc!</h3>
                     <p>Hệ thống hoạt động rất tốt! Trung bình mỗi người dùng đã học ${avgWordsPerUser} từ.</p>
                     <p>Tỷ lệ người dùng hoạt động: ${activeRate}% (${analyticsData.activeUsers}/${totalUsers})</p>
                 `;
             } else if (avgWordsPerUser >= 20) {
-                evaluationText = 'Tốt!';
                 evaluationClass = 'good';
                 evaluationElement.innerHTML = `
-                    <h3>${evaluationText}</h3>
+                    <h3>Tốt!</h3>
                     <p>Hệ thống hoạt động tốt. Trung bình mỗi người dùng đã học ${avgWordsPerUser} từ.</p>
                     <p>Tỷ lệ người dùng hoạt động: ${activeRate}% (${analyticsData.activeUsers}/${totalUsers})</p>
                 `;
             } else if (avgWordsPerUser >= 5) {
-                evaluationText = 'Khá';
                 evaluationClass = 'average';
                 evaluationElement.innerHTML = `
-                    <h3>${evaluationText}</h3>
+                    <h3>Khá</h3>
                     <p>Hệ thống hoạt động khá. Trung bình mỗi người dùng đã học ${avgWordsPerUser} từ.</p>
                     <p>Tỷ lệ người dùng hoạt động: ${activeRate}% (${analyticsData.activeUsers}/${totalUsers})</p>
                     <p>Hãy khuyến khích người dùng học thêm từ mới!</p>
                 `;
             } else {
-                evaluationText = 'Cần cải thiện';
                 evaluationClass = 'poor';
                 evaluationElement.innerHTML = `
-                    <h3>${evaluationText}</h3>
+                    <h3>Cần cải thiện</h3>
                     <p>Hệ thống cần được cải thiện. Trung bình mỗi người dùng chỉ học được ${avgWordsPerUser} từ.</p>
                     <p>Tỷ lệ người dùng hoạt động: ${activeRate}% (${analyticsData.activeUsers}/${totalUsers})</p>
                     <p>Cần có biện pháp thu hút và khuyến khích người dùng học tập nhiều hơn!</p>
@@ -2414,11 +2429,9 @@
             evaluationElement.classList.add(evaluationClass);
         }
 
-        // Setup analytics filters - ĐƠN GIẢN CHỈ CÓ SELECT BOX
         document.getElementById('analytics-user-filter').addEventListener('change', () => {
             const userId = document.getElementById('analytics-user-filter').value;
             
-            // Xử lý các option đặc biệt
             if (userId === 'top-10') {
                 loadAnalyticsData('top-10');
             } else {
@@ -2426,23 +2439,19 @@
             }
         });
 
-        // Thêm sự kiện cho nút xem từ vựng trong chi tiết người dùng
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('view-user-vocab')) {
                 const userId = e.target.getAttribute('data-userid');
-                // Chuyển sang tab từ vựng và lọc theo người dùng
                 document.querySelector('[data-tab="vocabulary"]').click();
                 document.getElementById('vocab-user-filter').value = userId;
                 loadUserVocabulary(userId);
                 
-                // Tìm tên người dùng
                 const userStat = analyticsData.userStats?.[userId];
                 const userName = userStat ? (userStat.userInfo.name || userStat.userInfo.email) : userId;
                 showAlert(`Đang hiển thị từ vựng của: ${userName}`, 'success');
             }
         });
 
-        // Setup vocabulary filters
         document.getElementById('vocab-user-filter').addEventListener('change', () => {
             currentPage = 1;
             const userId = document.getElementById('vocab-user-filter').value;
@@ -2456,21 +2465,18 @@
         
         document.getElementById('vocab-search').addEventListener('input', () => {
             currentPage = 1;
-            // Không load lại ngay, chỉ khi người dùng dừng gõ
             clearTimeout(window.searchTimeout);
             window.searchTimeout = setTimeout(() => {
                 applyFiltersAndDisplay();
             }, 500);
         });
 
-        // Nút làm mới trong tab từ vựng
         document.getElementById('refresh-vocab').addEventListener('click', () => {
             currentPage = 1;
             const userId = document.getElementById('vocab-user-filter').value;
             loadUserVocabulary(userId || null);
         });
 
-        // Close modal
         document.querySelector('.close-modal').addEventListener('click', () => {
             document.getElementById('vocab-modal').style.display = 'none';
         });
@@ -2482,28 +2488,22 @@
             }
         });
 
-        // Show alert message
         function showAlert(message, type) {
-            // Remove existing alerts
             const existingAlerts = document.querySelectorAll('.alert');
             existingAlerts.forEach(alert => alert.remove());
             
-            // Create new alert
             const alert = document.createElement('div');
             alert.className = `alert ${type}`;
             alert.textContent = message;
             
-            // Insert after tabs
             const tabs = document.querySelector('.tabs');
             tabs.parentNode.insertBefore(alert, tabs.nextSibling);
             
-            // Auto remove after 5 seconds
             setTimeout(() => {
                 alert.remove();
             }, 5000);
         }
 
-        // Logout
         document.getElementById('logout').addEventListener('click', () => {
             auth.signOut().then(() => {
                 window.location.href = 'index.html';
