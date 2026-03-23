@@ -3370,6 +3370,13 @@
                 for (const mcq of jsonContent.mcqs) {
                     if (savedCount >= quantity) break;
                     
+                    await db.collection('rooms').doc(currentRoomId).collection('contents').add({
+                        type: 'mcq',
+                        question: mcq.question,
+                        options: mcq.options,
+                        points: 1,
+                        createdBy: currentUserId,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                         aiGenerated: true,
                         aiTopic: topic,
                         aiDifficulty: difficulty
@@ -3383,12 +3390,5 @@
             closeAiGenerateModal();
         }
     </script>
-                    await db.collection('rooms').doc(currentRoomId).collection('contents').add({
-                        type: 'mcq',
-                        question: mcq.question,
-                        options: mcq.options,
-                        points: 1,
-                        createdBy: currentUserId,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 </body>
 </html>
