@@ -58,21 +58,21 @@
       text-align: center;
     }
 
-    /* TOP BAR */
+    /* TOP BAR - CỐ ĐỊNH, NỀN TRẮNG ĐỤC */
     #top-bar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 70px;
-      border-bottom: 2px solid rgba(200, 200, 200, 0.3);
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: rgba(255, 255, 255, 0.92);
+      background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
       z-index: 100;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     #top-bar>div {
@@ -83,17 +83,19 @@
       padding-left: 20px;
     }
 
-    /* HERO SECTION - ẢNH TRÀN TOÀN BỘ MÀN HÌNH */
+    /* HERO SECTION - ẢNH TRÀN TOÀN BỘ MÀN HÌNH, NHƯNG DỊCH XUỐNG DƯỚI BẰNG CHIỀU CAO THANH BAR */
     .hero-fullscreen {
       position: relative;
       width: 100%;
-      height: 100vh;
-      min-height: 600px;
+      /* Chiều cao = 100vh - 70px (bằng đúng khoảng dịch xuống) */
+      height: calc(100vh - 70px);
+      min-height: calc(600px - 70px);
       overflow: hidden;
-      margin-top: 0;
+      /* Đẩy xuống dưới bằng đúng chiều cao của top bar */
+      margin-top: 70px;
     }
 
-    /* ẢNH GIAO DIỆN CHÍNH DIỆN - FULL WIDTH, COVER TOÀN BỘ KHUNG */
+    /* ẢNH GIAO DIỆN CHÍNH DIỆN - FULL WIDTH, COVER TOÀN BỘ KHUNG, KHÔNG BỊ CHE */
     .hero-background {
       position: absolute;
       top: 0;
@@ -107,14 +109,14 @@
       z-index: 1;
     }
 
-    /* Lớp phủ nhẹ giúp chữ nổi bật hơn (tùy chọn, vẫn thấy rõ ảnh) */
+    /* Lớp phủ nhẹ giúp chữ nổi bật */
     .hero-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.1) 100%);
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.05) 100%);
       z-index: 2;
     }
 
@@ -131,7 +133,7 @@
       text-align: center;
       padding: 0 1.5rem;
       color: white;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .hero-title {
@@ -187,7 +189,7 @@
       transform: translateY(2px);
     }
 
-    /* Features section - cách hero một khoảng */
+    /* Features section */
     .features {
       margin: 100px 0 100px;
       display: flex;
@@ -233,7 +235,7 @@
       color: #1f2f3c;
     }
 
-    /* container chung cho các phần phụ */
+    /* info section */
     .info-section {
       max-width: 1200px;
       margin: 0 auto 5rem auto;
@@ -300,7 +302,6 @@
       }
     }
 
-    /* Responsive cho hero trên mobile vẫn tràn full màn hình */
     @media (max-width: 768px) {
       .hero-title {
         font-size: 2.2rem;
@@ -310,7 +311,7 @@
         font-size: 1.1rem;
       }
       .hero-fullscreen {
-        min-height: 550px;
+        min-height: calc(550px - 70px);
       }
       .features {
         margin: 60px 0;
@@ -321,17 +322,17 @@
 
 <body>
   <div id="app">
-    <!-- Top bar cố định, nền trong suốt pha trắng -->
+    <!-- Top bar cố định trên cùng -->
     <div id="top-bar">
       <div>
         <img src="https://learnenglishwithaurora.github.io/aurora.svg" alt="BeeEnglish" style="height: 46px;">
-        <p style="color: #ffde59; font-weight: bolder; font-size: 25px; margin:0; text-shadow: 0 1px 2px rgba(0,0,0,0.05);">BeeEnglish</p>
+        <p style="color: #ffde59; font-weight: bolder; font-size: 25px; margin:0;">BeeEnglish</p>
       </div>
     </div>
 
-    <!-- PHẦN HERO: ẢNH GIAO DIỆN CHÍNH DIỆN TRÀN TOÀN MÀN HÌNH, RỘNG FULL WIDTH, CHIẾM TOÀN BỘ KHU VỰC ĐẦU -->
+    <!-- PHẦN HERO: ẢNH ĐÃ ĐƯỢC DỊCH XUỐNG DƯỚI ĐÚNG BẰNG CHIỀU CAO CỦA THANH BAR -->
     <div class="hero-fullscreen">
-      <!-- ẢNH NỀN CHÍNH DIỆN - FULL MÀN HÌNH NGAY KHI VÀO WEB -->
+      <!-- ẢNH GIAO DIỆN CHÍNH DIỆN TRÀN FULL, VỪA KHÍT VỚI THANH BAR Ở TRÊN -->
       <div class="hero-background"></div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
