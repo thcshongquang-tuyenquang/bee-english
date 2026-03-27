@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học từ vựng - Niceng</title>
+    <title>Học từ vựng - BeeEnglish</title>
     <link rel="icon" type="image/svg+xml" href="https://learnenglishwithaurora.github.io/aurora.svg" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -31,7 +31,11 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+          
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             height: 100vh;
             overflow: hidden;
         }
@@ -42,7 +46,8 @@
             height: 100vh;
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             overflow: hidden;
         }
@@ -100,7 +105,6 @@
             align-items: center;
             justify-content: center;
             overflow-y: auto;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             width: 100%;
         }
 
@@ -898,8 +902,8 @@
     <div id="app">
         <div id="top-bar">
             <div class="logo">
-                <img src="https://learnenglishwithaurora.github.io/aurora.svg" alt="Niceng">
-                <h1>Niceng</h1>
+                <img src="https://learnenglishwithaurora.github.io/aurora.svg" alt="BeeEnglish">
+                <h1>BeeEnglish</h1>
             </div>
             <div class="user-info">
                 <button id="login-btn" class="login-btn" title="Đăng nhập">
@@ -924,12 +928,7 @@
                 <div class="form-group">
                     <input type="text" placeholder="Ví dụ (tiếng Anh)" id="example" />
                 </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Phiên âm (ví dụ: /ˈhɛləʊ/)" id="custom-pronunciation" />
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Dịch nghĩa của ví dụ (tiếng Việt)" id="custom-example-translation" />
-                </div>
+                <div id="auto-enrich-status" style="font-size: 12px; color: #666; margin-bottom: 10px; text-align: center;"></div>
                 <button type="button" id="submit" class="btn">Thêm từ</button>
             </div>
         </div>
@@ -968,33 +967,6 @@
                     <div id="ai-words-container"></div>
                     <button type="button" id="add-all-words" class="btn" style="margin-top: 10px;">Thêm tất cả</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- Popup thêm từ thủ công (giống AI nhưng người dùng tự nhập) -->
-        <div class="pop-up" id="manual-add-menu">
-            <div class="pop-up-content">
-                <span id="close-manual-add-menu" class="material-symbols-outlined close">close</span>
-                <h2>Thêm từ thủ công (có phiên âm và dịch ví dụ)</h2>
-                <div class="form-group">
-                    <input type="text" placeholder="Từ tiếng Anh" id="manual-word" />
-                    <button class="test-pronunciation-btn" id="manual-test-pronunciation" title="Kiểm tra phát âm">
-                        <span class="material-symbols-outlined">volume_up</span>
-                    </button>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Nghĩa tiếng Việt" id="manual-meaning" />
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Ví dụ (tiếng Anh)" id="manual-example" />
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Phiên âm (ví dụ: /ˈhɛləʊ/)" id="manual-pronunciation" />
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Dịch nghĩa của ví dụ (tiếng Việt)" id="manual-example-translation" />
-                </div>
-                <button type="button" id="submit-manual" class="btn">Thêm từ</button>
             </div>
         </div>
 
@@ -1127,10 +1099,6 @@
                         <span class="material-symbols-outlined">smart_toy</span>
                         Thêm từ bằng AI
                     </button>
-                    <button class="action-btn" id="manual-add">
-                        <span class="material-symbols-outlined">edit_note</span>
-                        Thêm từ thủ công
-                    </button>
                     <button class="action-btn" id="list">
                         <span class="material-symbols-outlined">view_carousel</span>
                         Danh sách
@@ -1199,23 +1167,26 @@
 
         // Hàm lấy API key đã được bảo vệ
         function getOpenAIKey() {
+            // Chia key thành 2 phần và đảo ngược để bảo mật
             const part1_reversed = "_L2U4Fyd4cNY1in7PrQE6V_mDmpYZJFkblB3TusKIssDSAVCA7SF01BvE-cdNVla941Usb9q-6Z1wtc0Fl1auxBNxIChkrO9M9RFsEhagS4-tlv-jorp-ks";
             const part2_reversed = "AkRxJpmnPSXoMn6H_vuUP9hbprDogpWx-6JbAELmjlHVe"; 
             
+            // Đảo ngược lại để lấy key gốc
             const part1 = part1_reversed.split('').reverse().join('');
             const part2 = part2_reversed.split('').reverse().join('');
             
+            // Ghép lại thành key hoàn chỉnh
             return part1 + part2;
         }
 
-        // Hàm lấy phiên âm và dịch ví dụ từ OpenAI
+        // Hàm mới: Lấy phiên âm và dịch ví dụ từ OpenAI
         async function enrichWordData(wordData) {
             const API_KEY = getOpenAIKey();
-            const prompt = `Cung cấp thông tin cho từ tiếng Anh "${wordData.english}".
+            const prompt = `Cung cấp thông tin cho từ tiếng Anh "${wordData.english}" với câu ví dụ "${wordData.example}".
 Trả về JSON duy nhất với cấu trúc:
 {
     "pronunciation": "phiên âm IPA",
-    "exampleTranslation": "bản dịch tiếng Việt của câu ví dụ: ${wordData.example}"
+    "exampleTranslation": "bản dịch tiếng Việt của câu ví dụ"
 }
 Chỉ trả về JSON.`;
 
@@ -1264,6 +1235,7 @@ Chỉ trả về JSON.`;
         // Check authentication state
         auth.onAuthStateChanged((user) => {
             if (user) {
+                // Check if user is admin
                 db.collection('users').doc(user.uid).get().then((doc) => {
                     if (doc.exists) {
                         const userData = doc.data();
@@ -1275,10 +1247,13 @@ Chỉ trả về JSON.`;
                         }
                     }
                     
+                    // Load user's cards
                     loadUserCards();
+                    // Load library categories
                     loadLibraryCategories();
                 });
             } else {
+                // Nếu không có user, tự động đăng nhập ẩn danh
                 auth.signInAnonymously()
                     .then(() => {
                         console.log('Đã đăng nhập ẩn danh');
@@ -1462,8 +1437,8 @@ Chỉ trả về JSON.`;
                                 <strong>${card.word}</strong>: ${card.meaning}
                             </div>
                             ${card.example ? `<div><small>Ví dụ: ${card.example}</small></div>` : ''}
-                            ${card.pronunciation ? `<div><small>Phiên âm: ${card.pronunciation}</small></div>` : ''}
-                            ${card.exampleTranslation ? `<div><small>Dịch ví dụ: ${card.exampleTranslation}</small></div>` : ''}
+                            ${card.pronunciation ? `<div><small>/${card.pronunciation}/</small></div>` : ''}
+                            ${card.exampleTranslation ? `<div><small>→ ${card.exampleTranslation}</small></div>` : ''}
                             ${card.category ? `<br><small style="color: #FFA500;">Chủ đề: ${card.category}</small>` : ''}
                             ${card.status === 'known' ? '<br><small style="color: #2196F3;">(Đã biết)</small>' : ''}
                         </div>
@@ -1486,8 +1461,6 @@ Chỉ trả về JSON.`;
                                 <strong>${card.word}</strong>: ${card.meaning}
                             </div>
                             ${card.example ? `<div><small>Ví dụ: ${card.example}</small></div>` : ''}
-                            ${card.pronunciation ? `<div><small>Phiên âm: ${card.pronunciation}</small></div>` : ''}
-                            ${card.exampleTranslation ? `<div><small>Dịch ví dụ: ${card.exampleTranslation}</small></div>` : ''}
                             ${card.category ? `<br><small style="color: #FFA500;">Chủ đề: ${card.category}</small>` : ''}
                             <br><small style="color: #4CAF50;">(Đã thuộc)</small>
                         </div>
@@ -1530,17 +1503,30 @@ Chỉ trả về JSON.`;
             }, 3000);
         }
 
-        // Add new card with custom fields
-        document.getElementById('submit').addEventListener('click', () => {
-            const word = document.getElementById('word').value;
-            const meaning = document.getElementById('meaning').value;
-            const example = document.getElementById('example').value;
-            const pronunciation = document.getElementById('custom-pronunciation').value;
-            const exampleTranslation = document.getElementById('custom-example-translation').value;
+        // Add new card - ĐÃ SỬA: TỰ ĐỘNG LẤY PHIÊN ÂM VÀ DỊCH VÍ DỤ
+        document.getElementById('submit').addEventListener('click', async () => {
+            const word = document.getElementById('word').value.trim();
+            const meaning = document.getElementById('meaning').value.trim();
+            const example = document.getElementById('example').value.trim();
             
             if (!word || !meaning) {
                 alert('Vui lòng nhập từ và nghĩa!');
                 return;
+            }
+            
+            const statusDiv = document.getElementById('auto-enrich-status');
+            let pronunciation = '';
+            let exampleTranslation = '';
+            
+            // Nếu có ví dụ, tự động lấy phiên âm và dịch ví dụ
+            if (example) {
+                statusDiv.innerHTML = '🔄 Đang lấy phiên âm và dịch ví dụ...';
+                const enrichment = await enrichWordData({ english: word, example: example });
+                pronunciation = enrichment.pronunciation;
+                exampleTranslation = enrichment.exampleTranslation;
+                statusDiv.innerHTML = '✅ Đã lấy xong phiên âm và dịch ví dụ!';
+            } else {
+                statusDiv.innerHTML = '';
             }
             
             const user = auth.currentUser;
@@ -1549,9 +1535,9 @@ Chỉ trả về JSON.`;
             db.collection('users').doc(user.uid).collection('cards').add({
                 word: word,
                 meaning: meaning,
-                example: example || '',
-                pronunciation: pronunciation || '',
-                exampleTranslation: exampleTranslation || '',
+                example: example,
+                pronunciation: pronunciation,
+                exampleTranslation: exampleTranslation,
                 status: 'learning',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             })
@@ -1559,66 +1545,17 @@ Chỉ trả về JSON.`;
                 document.getElementById('word').value = '';
                 document.getElementById('meaning').value = '';
                 document.getElementById('example').value = '';
-                document.getElementById('custom-pronunciation').value = '';
-                document.getElementById('custom-example-translation').value = '';
                 document.getElementById('add-menu').classList.remove('active');
+                statusDiv.innerHTML = '';
                 showAlert('Đã thêm từ mới!');
             })
             .catch((error) => {
                 console.error('Error adding card: ', error);
+                statusDiv.innerHTML = '❌ Có lỗi xảy ra khi thêm từ!';
             });
         });
 
-        // Add manual word (thêm từ thủ công - giống AI nhưng người dùng tự nhập)
-        document.getElementById('submit-manual').addEventListener('click', () => {
-            const word = document.getElementById('manual-word').value;
-            const meaning = document.getElementById('manual-meaning').value;
-            const example = document.getElementById('manual-example').value;
-            const pronunciation = document.getElementById('manual-pronunciation').value;
-            const exampleTranslation = document.getElementById('manual-example-translation').value;
-            
-            if (!word || !meaning) {
-                alert('Vui lòng nhập từ và nghĩa!');
-                return;
-            }
-            
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            db.collection('users').doc(user.uid).collection('cards').add({
-                word: word,
-                meaning: meaning,
-                example: example || '',
-                pronunciation: pronunciation || '',
-                exampleTranslation: exampleTranslation || '',
-                status: 'learning',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                document.getElementById('manual-word').value = '';
-                document.getElementById('manual-meaning').value = '';
-                document.getElementById('manual-example').value = '';
-                document.getElementById('manual-pronunciation').value = '';
-                document.getElementById('manual-example-translation').value = '';
-                document.getElementById('manual-add-menu').classList.remove('active');
-                showAlert('Đã thêm từ mới!');
-            })
-            .catch((error) => {
-                console.error('Error adding card: ', error);
-            });
-        });
-
-        // Test pronunciation button for manual add
-        document.getElementById('manual-test-pronunciation').addEventListener('click', () => {
-            const word = document.getElementById('manual-word').value;
-            if (word.trim()) {
-                speakText(word.trim());
-            } else {
-                alert('Vui lòng nhập từ tiếng Anh trước khi kiểm tra phát âm!');
-            }
-        });
-
-        // Test pronunciation button for quick add
+        // Test pronunciation button
         document.getElementById('test-pronunciation').addEventListener('click', () => {
             const word = document.getElementById('word').value;
             if (word.trim()) {
@@ -1628,7 +1565,7 @@ Chỉ trả về JSON.`;
             }
         });
 
-        // AI Functions with OpenAI
+        // AI Functions với OpenAI
         async function generateVocabularyWithAI(topic, level, count) {
             const API_KEY = getOpenAIKey();
             
@@ -1682,6 +1619,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
                 const data = await response.json();
                 const content = data.choices[0].message.content;
                 
+                // Tìm JSON trong response
                 const jsonMatch = content.match(/\{[\s\S]*\}/);
                 if (jsonMatch) {
                     return JSON.parse(jsonMatch[0]);
@@ -1694,11 +1632,11 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             }
         }
 
-        // Hàm làm giàu dữ liệu cho tất cả các từ được tạo
+        // Hàm làm giàu dữ liệu cho tất cả các từ được tạo (lấy phiên âm và dịch ví dụ)
         async function enrichAllWords(wordsArray) {
             const enrichedWords = [];
             for (const word of wordsArray) {
-                const enrichment = await enrichWordData(word);
+                const enrichment = await enrichWordData({ english: word.english, example: word.example });
                 enrichedWords.push({
                     ...word,
                     pronunciation: enrichment.pronunciation || '',
@@ -1734,11 +1672,13 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
                 const result = await generateVocabularyWithAI(topic, level, count);
                 const rawWords = result.words;
                 
+                // Thông báo đang lấy phiên âm và dịch ví dụ
                 generateBtn.innerHTML = '<span class="loading"></span>Đang lấy phiên âm và dịch ví dụ...';
                 
                 const enrichedWords = await enrichAllWords(rawWords);
                 aiGeneratedWords = enrichedWords;
                 
+                // Hiển thị kết quả
                 displayAIWords(aiGeneratedWords);
                 document.getElementById('ai-results').style.display = 'block';
                 
@@ -1751,7 +1691,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             }
         });
 
-        // Display AI generated words
+        // Display AI generated words (đã bao gồm phiên âm và dịch ví dụ)
         function displayAIWords(words) {
             const container = document.getElementById('ai-words-container');
             container.innerHTML = '';
@@ -1781,13 +1721,14 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             });
         }
 
-        // Add single AI word to collection
+        // Add single AI word to collection (bao gồm phiên âm và dịch ví dụ)
         function addAIWordToCollection(index) {
             const wordData = aiGeneratedWords[index];
             const user = auth.currentUser;
             
             if (!user) return;
             
+            // Lưu thêm phiên âm và bản dịch ví dụ vào Firestore
             const cardData = {
                 word: wordData.english,
                 meaning: wordData.vietnamese,
@@ -1927,7 +1868,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             document.getElementById('attention-drag-review').style.display = 'none';
         });
 
-        // Show current card for learning
+        // Show current card for learning (ĐÃ THÊM PHIÊN ÂM VÀ DỊCH VÍ DỤ)
         function showCard() {
             if (currentCardIndex >= cardsToLearn.length) {
                 document.getElementById('learn-menu').classList.remove('active');
@@ -1950,16 +1891,19 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             
             const back = flashcard.querySelector('.back');
             
+            // Xây dựng nội dung mặt sau
             let backHtml = `
                 <div class="word-with-voice">
                     <h1>${card.meaning}</h1>
                 </div>
             `;
             
+            // Hiển thị phiên âm nếu có
             if (card.pronunciation) {
                 backHtml += `<div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">/${card.pronunciation}/</div>`;
             }
             
+            // Hiển thị ví dụ và bản dịch nếu có
             if (card.example) {
                 backHtml += `<div class="example-with-voice" style="flex-direction: column; margin-top: 10px;">
                                 <p style="font-style: italic;">${card.example}</p>`;
@@ -1977,6 +1921,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             
             back.innerHTML = backHtml;
             
+            // Thêm nút voice cho ví dụ
             if (card.example) {
                 const exampleContainer = back.querySelector('.example-with-voice');
                 if (exampleContainer) {
@@ -1991,7 +1936,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             back.querySelector('#wrong').addEventListener('click', () => markCardAsLearning());
         }
 
-        // Show current card for review
+        // Show current card for review (ĐÃ THÊM PHIÊN ÂM VÀ DỊCH VÍ DỤ)
         function showReviewCard() {
             if (currentCardIndex >= cardsToReview.length) {
                 document.getElementById('review-menu').classList.remove('active');
@@ -2061,6 +2006,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             
             if (!user) return;
             
+            // Lưu lịch sử học tập
             saveLearningHistory('learned', card.word);
             
             db.collection('users').doc(user.uid).collection('cards').doc(card.id).update({
@@ -2101,6 +2047,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             
             if (!user) return;
             
+            // Lưu lịch sử học tập
             saveLearningHistory('mastered', card.word);
             
             db.collection('users').doc(user.uid).collection('cards').doc(card.id).update({
@@ -2199,6 +2146,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             const today = new Date();
             const dateString = today.toISOString().split('T')[0];
             
+            // Lấy dữ liệu hôm nay
             db.collection('users').doc(user.uid).collection('learningHistory').doc(dateString).get()
                 .then((todayDoc) => {
                     let learnedToday = 0;
@@ -2210,6 +2158,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
                         masteredToday = todayData.masteredToday || 0;
                     }
                     
+                    // Lấy dữ liệu 7 ngày gần nhất
                     const last7Days = [];
                     for (let i = 6; i >= 0; i--) {
                         const date = new Date();
@@ -2241,8 +2190,10 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
                             }
                         });
                         
+                        // Cập nhật biểu đồ
                         updateProgressChart(labels, learnedData, masteredData);
                         
+                        // Tính toán thay đổi so với hôm qua
                         const yesterdayIndex = docs.length - 2;
                         const yesterdayLearned = yesterdayIndex >= 0 ? learnedData[yesterdayIndex] : 0;
                         const yesterdayMastered = yesterdayIndex >= 0 ? masteredData[yesterdayIndex] : 0;
@@ -2250,12 +2201,14 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
                         const learnedChange = learnedToday - yesterdayLearned;
                         const masteredChange = masteredToday - yesterdayMastered;
                         
+                        // Cập nhật thông tin tổng kết
                         document.getElementById('learned-today').textContent = learnedToday;
                         document.getElementById('mastered-today').textContent = masteredToday;
                         
                         document.getElementById('learned-change').textContent = (learnedChange >= 0 ? '+' : '') + learnedChange;
                         document.getElementById('mastered-change').textContent = (masteredChange >= 0 ? '+' : '') + masteredChange;
                         
+                        // Đánh giá tiến độ
                         evaluateProgress(learnedToday, masteredToday, learnedChange, masteredChange);
                     });
                 })
@@ -2268,6 +2221,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
         function updateProgressChart(labels, learnedData, masteredData) {
             const ctx = document.getElementById('progress-chart').getContext('2d');
             
+            // Hủy biểu đồ cũ nếu tồn tại
             if (progressChart) {
                 progressChart.destroy();
             }
@@ -2324,6 +2278,7 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             const evaluationElement = document.getElementById('evaluation-message');
             const totalProgress = learnedToday + masteredToday;
             
+            // Xóa tất cả các lớp đánh giá trước đó
             evaluationElement.className = 'evaluation';
             
             if (totalProgress === 0) {
@@ -2389,15 +2344,6 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             aiGeneratedWords = [];
         }
 
-        // Hàm reset popup manual
-        function resetManualPopup() {
-            document.getElementById('manual-word').value = '';
-            document.getElementById('manual-meaning').value = '';
-            document.getElementById('manual-example').value = '';
-            document.getElementById('manual-pronunciation').value = '';
-            document.getElementById('manual-example-translation').value = '';
-        }
-
         // Event listeners for popups
         document.getElementById('add').addEventListener('click', () => {
             document.getElementById('add-menu').classList.add('active');
@@ -2406,11 +2352,6 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
         document.getElementById('ai-add').addEventListener('click', () => {
             resetAIPopup();
             document.getElementById('ai-add-menu').classList.add('active');
-        });
-
-        document.getElementById('manual-add').addEventListener('click', () => {
-            resetManualPopup();
-            document.getElementById('manual-add-menu').classList.add('active');
         });
 
         document.getElementById('list').addEventListener('click', () => {
@@ -2447,11 +2388,6 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             resetAIPopup();
         });
 
-        document.getElementById('close-manual-add-menu').addEventListener('click', () => {
-            document.getElementById('manual-add-menu').classList.remove('active');
-            resetManualPopup();
-        });
-
         document.getElementById('close-card-list-menu').addEventListener('click', () => {
             document.getElementById('card-list-menu').classList.remove('active');
         });
@@ -2477,12 +2413,6 @@ Chỉ trả về JSON, không thêm bất kỳ văn bản nào khác.`;
             if (aiPopup.classList.contains('active') && e.target === aiPopup) {
                 aiPopup.classList.remove('active');
                 resetAIPopup();
-            }
-            
-            const manualPopup = document.getElementById('manual-add-menu');
-            if (manualPopup.classList.contains('active') && e.target === manualPopup) {
-                manualPopup.classList.remove('active');
-                resetManualPopup();
             }
         });
 
