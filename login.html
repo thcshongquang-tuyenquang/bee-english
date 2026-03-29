@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập - Niceng</title>
+    <title>Đăng nhập - BeeEnglish</title>
     <link rel="icon" type="image/svg+xml" href="https://learnenglishwithaurora.github.io/aurora.svg" />
     <style>
         :root {
@@ -12,7 +12,6 @@
             font-weight: 400;
             color-scheme: light;
             color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             font-synthesis: none;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
@@ -26,18 +25,38 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-image: url('https://i.postimg.cc/pV8cRV0q/z7661851515824-697191548b7f61fce0f4c0a12536ee69.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* Thêm lớp phủ tối để chữ nổi bật hơn */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
         }
 
         .login-container {
             background-color: white;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             padding: 40px;
             width: 100%;
             max-width: 450px;
             border: 2px solid #FFD700;
             transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(0px);
         }
 
         .login-container:hover {
@@ -171,7 +190,7 @@
     <div class="login-container">
         <div class="logo">
             <img src="https://learnenglishwithaurora.github.io/aurora.svg" alt="Niceng">
-            <h1>Niceng</h1>
+            <h1>BeeEnglish</h1>
             <div class="welcome-text">
                 Học tiếng Anh hiệu quả với phương pháp flashcard thông minh
             </div>
