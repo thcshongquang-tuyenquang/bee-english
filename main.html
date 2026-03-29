@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Toàn bộ CSS giữ nguyên như code cũ, không thay đổi */
-        :root {
+               :root {
             font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
             line-height: 1.5;
             font-weight: 400;
@@ -31,16 +30,31 @@
         body {
             margin: 0;
             padding: 0;
-          
+            background-image: url('https://i.postimg.cc/pV8cRV0q/z7661851515824-697191548b7f61fce0f4c0a12536ee69.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             height: 100vh;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Lớp phủ mờ để tăng độ tương phản cho nội dung */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
         }
 
         #app {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             height: 100vh;
@@ -50,6 +64,7 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             overflow: hidden;
+            border-radius: 0;
         }
 
         #top-bar {
